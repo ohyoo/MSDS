@@ -2,11 +2,14 @@
   "name": "uconn-msds-curriculum-explorer",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
-    "start": "next start --hostname 0.0.0.0",
+    "start": "node scripts/serve-static.mjs",
+    "guide:serve": "tsx server/guide-server.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
