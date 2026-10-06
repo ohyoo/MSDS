@@ -1,0 +1,300 @@
+[
+  {
+    "id": "ai-machine-learning",
+    "title": "AI & Machine Learning",
+    "summary": "Explore how learning methods and modern AI connect to statistical, computational, and responsible-practice foundations.",
+    "tags": [
+      "artificial-intelligence",
+      "generative-ai",
+      "machine-learning",
+      "deep-learning",
+      "bayesian",
+      "reinforcement-learning"
+    ],
+    "coreCourses": [
+      "GRAD 5100",
+      "STAT 5405",
+      "STAT 5410",
+      "CSE 5709",
+      "CSE 5710",
+      "ARE 5353"
+    ],
+    "electives": [
+      "CSE 5825",
+      "CSE 5830",
+      "CSE 5820",
+      "CSE 5602",
+      "CSE 5717",
+      "OPIM 5509",
+      "OPIM 5516",
+      "OPIM 5512",
+      "GRAD 5900"
+    ],
+    "catalogCourses": [
+      "OPIM 5515",
+      "OPIM 5517",
+      "OPIM 5518",
+      "STAT 5865",
+      "STAT 6615",
+      "NRE 5615"
+    ],
+    "applications": [
+      "Evaluate a predictive model for a domain problem",
+      "Study reliability and fairness of an AI-assisted workflow"
+    ],
+    "careers": ["Machine learning", "AI applications", "Predictive modeling"],
+    "official": false
+  },
+  {
+    "id": "sports-analytics",
+    "title": "Sports Analytics",
+    "summary": "Connect prediction, causal questions, visualization, and decisions to sports problems.",
+    "tags": [
+      "sports",
+      "prediction",
+      "time-series",
+      "causal-inference",
+      "visualization",
+      "optimization",
+      "machine-learning"
+    ],
+    "coreCourses": [
+      "GRAD 5100",
+      "STAT 5405",
+      "STAT 5410",
+      "CSE 5709",
+      "CSE 5710",
+      "EPSY 5641",
+      "OPIM 5605"
+    ],
+    "electives": [
+      "OPIM 5604",
+      "STAT 5825",
+      "CSE 5707",
+      "STAT 5665",
+      "OPIM 5671",
+      "OPIM 5509",
+      "OPIM 5516",
+      "STAT 5675",
+      "CSE 5520"
+    ],
+    "catalogCourses": ["STAT 5835", "OPIM 5641"],
+    "applications": [
+      "Explore sports forecasting and uncertainty",
+      "Evaluate a sports decision or intervention"
+    ],
+    "careers": ["Sports analytics", "Performance analysis", "Forecasting"],
+    "official": false
+  },
+  {
+    "id": "business-decision-analytics",
+    "title": "Business & Decision Analytics",
+    "summary": "Use statistical evidence, AI, and communication to inform business and operational decisions.",
+    "tags": [
+      "business",
+      "decision-making",
+      "marketing",
+      "optimization",
+      "prediction",
+      "causal-inference",
+      "artificial-intelligence"
+    ],
+    "coreCourses": [
+      "GRAD 5100",
+      "STAT 5405",
+      "CSE 5709",
+      "CSE 5710",
+      "EPSY 5641",
+      "ARE 5353",
+      "OPIM 5605"
+    ],
+    "electives": [
+      "ARE 5311",
+      "MKTG 5115",
+      "OPIM 5604",
+      "OPIM 5512",
+      "OPIM 5504",
+      "OPIM 5502",
+      "OPIM 5510",
+      "OPIM 5671",
+      "MKTG 5220",
+      "MKTG 5250",
+      "MKTG 5251",
+      "MKTG 5655",
+      "GRAD 5900"
+    ],
+    "catalogCourses": ["OPIM 5515", "OPIM 5517", "OPIM 5518", "OPIM 5641"],
+    "applications": [
+      "Assess a business intervention",
+      "Build a decision-support analysis or dashboard"
+    ],
+    "careers": [
+      "Business analytics",
+      "Marketing analytics",
+      "Decision support"
+    ],
+    "official": false
+  },
+  {
+    "id": "health-biostatistics",
+    "title": "Health & Biostatistics",
+    "summary": "Explore how uncertainty, measurement, causal thinking, and domain knowledge support health-related analysis.",
+    "tags": [
+      "health",
+      "biostatistics",
+      "survival-analysis",
+      "longitudinal-data",
+      "categorical-data",
+      "causal-inference",
+      "bioinformatics"
+    ],
+    "coreCourses": [
+      "GRAD 5100",
+      "STAT 5405",
+      "STAT 5410",
+      "EPSY 5641",
+      "ARE 5353",
+      "OPIM 5605"
+    ],
+    "electives": [
+      "BIST 5625",
+      "BIST 5615",
+      "BIST 5645",
+      "BIST 5815",
+      "CSE 5800",
+      "CSE 5815",
+      "CSE 5840",
+      "CSE 5860",
+      "CSE 6800",
+      "EEB 5349",
+      "EPSY 6611",
+      "EPSY 6615",
+      "OPIM 5508",
+      "OPIM 5511"
+    ],
+    "catalogCourses": ["STAT 5835"],
+    "applications": [
+      "Analyze health outcomes with attention to study design",
+      "Communicate uncertainty in health evidence"
+    ],
+    "careers": ["Health analytics", "Biostatistics", "Research analytics"],
+    "official": false
+  },
+  {
+    "id": "geospatial-environmental",
+    "title": "Geospatial & Environmental Analytics",
+    "summary": "Bring data science foundations to questions involving place, spatial patterns, and environmental change.",
+    "tags": [
+      "geospatial",
+      "environment",
+      "gis",
+      "remote-sensing",
+      "spatial",
+      "spatio-temporal"
+    ],
+    "coreCourses": [
+      "GRAD 5100",
+      "STAT 5405",
+      "STAT 5410",
+      "ARE 5353",
+      "OPIM 5605"
+    ],
+    "electives": [
+      "NRE 5215",
+      "NRE 5525",
+      "NRE 5585",
+      "NRE 5535",
+      "ARE 5438",
+      "ARE 5462",
+      "ARE 5538",
+      "EEB 5050",
+      "STAT 5845"
+    ],
+    "catalogCourses": ["NRE 5605", "NRE 5615"],
+    "applications": [
+      "Explore spatial patterns in environmental data",
+      "Communicate place-based risk and uncertainty"
+    ],
+    "careers": [
+      "Geospatial analytics",
+      "Environmental data science",
+      "Spatial analysis"
+    ],
+    "official": false
+  },
+  {
+    "id": "advanced-statistics",
+    "title": "Advanced Statistics",
+    "summary": "Deepen statistical reasoning for complex data and uncertainty, building on the shared curriculum.",
+    "tags": [
+      "advanced-statistics",
+      "bayesian",
+      "time-series",
+      "spatio-temporal",
+      "survival-analysis",
+      "longitudinal-data"
+    ],
+    "coreCourses": ["GRAD 5100", "STAT 5405", "STAT 5410", "EPSY 5641"],
+    "electives": [
+      "STAT 5825",
+      "STAT 5845",
+      "STAT 5665",
+      "STAT 5675",
+      "BIST 5615",
+      "BIST 5645",
+      "BIST 5815",
+      "CSE 5825",
+      "EPSY 6611",
+      "EPSY 6615"
+    ],
+    "catalogCourses": ["STAT 5835", "STAT 5865", "STAT 6615"],
+    "applications": [
+      "Compare modeling approaches for complex data",
+      "Study uncertainty and model assumptions"
+    ],
+    "careers": [
+      "Statistical modeling",
+      "Research analytics",
+      "Quantitative analysis"
+    ],
+    "official": false
+  },
+  {
+    "id": "computing-systems",
+    "title": "Computing, Optimization & Systems",
+    "summary": "Explore the computational foundations and systems that make data science methods practical at scale.",
+    "tags": [
+      "computing",
+      "algorithms",
+      "optimization",
+      "high-performance-computing",
+      "distributed-systems",
+      "cybersecurity",
+      "data-engineering"
+    ],
+    "coreCourses": ["GRAD 5100", "STAT 5410", "CSE 5709", "CSE 5710"],
+    "electives": [
+      "CSE 5050",
+      "CSE 5707",
+      "CSE 5717",
+      "CSE 5850",
+      "CSE 5103",
+      "CSE 5304",
+      "CSE 5500",
+      "CSE 5506",
+      "CSE 5510",
+      "CSE 5512",
+      "CSE 5852",
+      "CSE 5854",
+      "CSE 6512",
+      "OPIM 5502"
+    ],
+    "catalogCourses": ["OPIM 5517", "CSE 5250"],
+    "applications": [
+      "Evaluate computational approaches to an analytical problem",
+      "Prototype a reproducible data processing workflow"
+    ],
+    "careers": ["Data engineering", "Computational analytics", "Optimization"],
+    "official": false
+  }
+]

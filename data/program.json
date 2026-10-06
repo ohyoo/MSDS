@@ -1,0 +1,14 @@
+{
+  "name": "UConn Master of Science in Data Science",
+  "credits": {
+    "total": 30,
+    "core": 21,
+    "electives": 6,
+    "capstone": 3
+  },
+  "electiveCount": 2,
+  "disclaimer": "Course offerings, prerequisites, and availability may change. Suggested pathways and course recommendations are for exploration and planning and do not constitute formal approval. Students should confirm elective selections with the MSDS program.",
+  "sourceUrl": "https://catalog.uconn.edu/graduate/degree-programs/data-science-ms/",
+  "lastChecked": "2026-10-06",
+  "sourceVerification": "verified"
+}

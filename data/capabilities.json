@@ -1,0 +1,68 @@
+[
+  {
+    "id": "problem-framing",
+    "title": "Problem framing & domain understanding",
+    "shortLabel": "Frame",
+    "description": "Turn a domain question into a useful data science problem with a clear purpose and audience."
+  },
+  {
+    "id": "data-preparation",
+    "title": "Data acquisition & preparation",
+    "shortLabel": "Prepare",
+    "description": "Understand how data is gathered, represented, checked, and prepared for analysis."
+  },
+  {
+    "id": "computation",
+    "title": "Programming & computation",
+    "shortLabel": "Compute",
+    "description": "Use programming and computational tools to make analysis reproducible and practical."
+  },
+  {
+    "id": "statistics",
+    "title": "Statistical foundations",
+    "shortLabel": "Reason",
+    "description": "Reason about variation, uncertainty, assumptions, and evidence."
+  },
+  {
+    "id": "visualization",
+    "title": "Exploration & visualization",
+    "shortLabel": "Explore",
+    "description": "Explore patterns and represent data visually to support understanding."
+  },
+  {
+    "id": "inference",
+    "title": "Statistical modeling & inference",
+    "shortLabel": "Model",
+    "description": "Build and assess statistical models, connecting results to the question being asked."
+  },
+  {
+    "id": "machine-learning",
+    "title": "Machine learning & AI",
+    "shortLabel": "Learn",
+    "description": "Use learning methods to find patterns and make predictions while examining their limitations."
+  },
+  {
+    "id": "causal-reasoning",
+    "title": "Causal reasoning & evaluation",
+    "shortLabel": "Evaluate",
+    "description": "Distinguish association from causation and reason about measurement and evaluation."
+  },
+  {
+    "id": "ethics",
+    "title": "Ethics, equity & responsible AI",
+    "shortLabel": "Reflect",
+    "description": "Consider who benefits, who may be harmed, and how data practices affect fairness and trust."
+  },
+  {
+    "id": "communication",
+    "title": "Communication & decision-making",
+    "shortLabel": "Communicate",
+    "description": "Explain evidence clearly so people can make informed decisions."
+  },
+  {
+    "id": "integration",
+    "title": "Integration & real-world application",
+    "shortLabel": "Integrate",
+    "description": "Bring foundations, methods, communication, and domain knowledge together in an applied project."
+  }
+]
