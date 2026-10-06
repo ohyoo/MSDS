@@ -18,7 +18,11 @@ function sourcesFor(selected: Course[] = []): GuideResponse["sources"] {
       url: course.sourceUrl,
     })),
   ];
-  return [...new Map(sources.map((source) => [`${source.label}|${source.url}`, source])).values()];
+  return [
+    ...new Map(
+      sources.map((source) => [`${source.label}|${source.url}`, source]),
+    ).values(),
+  ];
 }
 
 function summarizeCourse(course: Course): string {

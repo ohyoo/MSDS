@@ -437,11 +437,15 @@ export function recommendCourses(
         matches.forEach((match) =>
           match.tags.forEach((tag) => matchedTags.add(tag)),
         );
-        const skills = [
-          ...new Set(
-            matches.filter((match) => match.source !== "pathway mapping").slice(0, 3).map((match) => humanizeTag(match.concept)),
-          ),
-        ].join(", ") || "Related curriculum themes";
+        const skills =
+          [
+            ...new Set(
+              matches
+                .filter((match) => match.source !== "pathway mapping")
+                .slice(0, 3)
+                .map((match) => humanizeTag(match.concept)),
+            ),
+          ].join(", ") || "Related curriculum themes";
         reasons.push(
           group.id === "sports"
             ? `${skills[0].toUpperCase()}${skills.slice(1)} can support sports forecasting or performance decisions; this is a methods connection, not a sports-specific course claim.`
