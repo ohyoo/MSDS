@@ -1322,7 +1322,7 @@ h2 em {
 }
 .pathway-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
 .pathway-card {
@@ -2194,6 +2194,300 @@ h2 em {
   border-left: 2px solid #b2a383;
   color: #66563b;
   margin-top: 16px;
+}
+.catalog-collection-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #596a79;
+  font-size: 12px;
+  line-height: 1.8;
+  margin: -10px 0 26px;
+}
+.catalog-collection-note svg {
+  color: #5c788d;
+  margin-top: 2px;
+}
+.catalog-collection-note strong {
+  font-weight: 600;
+  color: #3c566d;
+}
+.signature-pathways {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.pathway-card.signature-pathway {
+  padding: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+.pathway-card.signature-navy {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+.pathway-card.signature-navy:hover {
+  border-color: #37658c;
+  background: #081e40;
+}
+.pathway-card.signature-light {
+  background: #fff;
+  border-color: #cad8df;
+}
+.signature-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 23px;
+}
+.signature-topline > span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  font-weight: 500;
+  color: #506e81;
+}
+.signature-topline > svg {
+  color: #557587;
+}
+.signature-navy .signature-topline > span,
+.signature-navy .signature-topline > svg {
+  color: #b8cddd;
+}
+.pathway-card.signature-pathway h3 {
+  font-size: 33px;
+  line-height: 1.16;
+  min-height: 0;
+  margin: 0 0 17px;
+}
+.pathway-card.signature-pathway > p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #596a79;
+  min-height: 75px;
+  flex: none;
+}
+.pathway-card.signature-navy > p {
+  color: #b8c8d9;
+}
+.signature-structure {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 13px;
+  font-size: 11px;
+  color: #516d7e;
+  border-bottom: 1px solid #e0e7ea;
+  padding: 20px 0 16px;
+}
+.signature-structure > span:first-child {
+  font-weight: 600;
+}
+.signature-structure > span:last-child {
+  color: #596a79;
+}
+.signature-navy .signature-structure {
+  color: #d6e3ec;
+  border-color: #ffffff24;
+}
+.signature-navy .signature-structure > span:last-child {
+  color: #b9cddd;
+}
+.signature-course-preview {
+  padding-top: 4px;
+}
+.signature-course-preview > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5ecef;
+}
+.signature-navy .signature-course-preview > div {
+  border-color: #ffffff1c;
+}
+.signature-course-number {
+  font-size: 10px;
+  color: #596a79;
+  padding-top: 1px;
+}
+.signature-navy .signature-course-number {
+  color: #adc2d4;
+}
+.signature-course-preview > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+.signature-course-code {
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  color: #426981;
+}
+.signature-navy .signature-course-code {
+  color: #c1d7e7;
+}
+.signature-course-title {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.signature-course-preview .status-badge {
+  margin-top: 9px;
+  font-size: 10px;
+  padding: 4px 6px;
+}
+.signature-optional {
+  font-size: 10px;
+  color: #596a79;
+  background: #edf2f5;
+  border-radius: 3px;
+  padding: 5px 7px;
+  white-space: nowrap;
+  margin-top: 18px;
+}
+.signature-navy .signature-optional {
+  background: #ffffff12;
+  color: #d3e1eb;
+}
+.signature-capstone {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 23px;
+}
+.signature-capstone > svg {
+  color: #50778a;
+  margin-top: 3px;
+}
+.signature-capstone > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.signature-capstone span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #5c7383;
+}
+.signature-capstone strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.35;
+}
+.signature-navy .signature-capstone > svg,
+.signature-navy .signature-capstone span {
+  color: #b3c9da;
+}
+.signature-explore {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 27px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.signature-approval-note {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #66583f;
+  background: #f0ede4;
+  border-radius: 3px;
+  padding: 12px 15px;
+  margin-top: 16px;
+}
+.pathway-combination-section > p {
+  font-size: 11px;
+}
+.pathway-combination-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 17px;
+}
+.pathway-combination-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #dce5eb;
+  border-radius: 4px;
+}
+.pathway-combination-row > div {
+  flex: 1;
+  min-width: 0;
+}
+.combination-course-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+}
+.combination-optional {
+  font-size: 10px;
+  color: #675b44;
+  background: #f5f0e4;
+  border-radius: 2px;
+  padding: 4px 6px;
+}
+.combination-course-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.3;
+  margin: 9px 0 12px;
+}
+.combination-course-title:hover {
+  color: var(--blue);
+}
+.combination-course-title > svg {
+  color: #526f85;
+}
+.pathway-combination-row .shortlist-button {
+  flex-shrink: 0;
+  padding: 8px;
+  font-size: 10px;
+}
+.pathway-combination-row .status-badge {
+  font-size: 10px;
+}
+.pathway-capstone-brief {
+  background: #edf4f5;
+  padding: 23px;
+  border-radius: 4px;
+  border: 1px solid #d8e6e8;
+}
+.pathway-capstone-brief h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.25;
+}
+.pathway-capstone-brief .application-list {
+  margin-top: 17px;
+  padding-top: 17px;
+  border-top: 1px solid #d5e3e7;
+}
+.pathway-capstone-brief > small {
+  display: block;
+  font-size: 10px;
+  color: #596a79;
+  line-height: 1.7;
+  margin-top: 19px;
 }
 @keyframes backdrop-in {
   from {
@@ -3378,5 +3672,110 @@ h2 em {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 960px) {
+  .signature-pathways {
+    gap: 18px;
+  }
+  .pathway-card.signature-pathway {
+    padding: 24px;
+  }
+  .pathway-card.signature-pathway h3 {
+    font-size: 29px;
+  }
+  .pathway-card.signature-pathway > p {
+    font-size: 13px;
+    min-height: 90px;
+  }
+  .signature-topline > span {
+    font-size: 9px;
+    letter-spacing: 0.7px;
+    gap: 7px;
+  }
+  .signature-course-preview > div {
+    flex-wrap: wrap;
+    gap: 7px 10px;
+  }
+  .signature-course-title {
+    font-size: 13px;
+  }
+  .signature-optional {
+    margin: 0 0 0 24px;
+  }
+  .signature-capstone strong {
+    font-size: 20px;
+  }
+}
+@media (max-width: 760px) {
+  .signature-pathways {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .pathway-card.signature-pathway {
+    padding: 26px 23px;
+  }
+  .pathway-card.signature-pathway h3 {
+    font-size: 31px;
+  }
+  .pathway-card.signature-pathway > p {
+    font-size: 14px;
+    min-height: 0;
+  }
+  .signature-topline > span {
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+  .signature-course-title {
+    font-size: 14px;
+  }
+  .signature-course-preview > div {
+    flex-wrap: nowrap;
+  }
+  .signature-optional {
+    margin: 18px 0 0;
+    font-size: 10px;
+    padding: 5px;
+  }
+  .catalog-collection-note {
+    font-size: 11px;
+    gap: 8px;
+    margin-bottom: 23px;
+  }
+  .signature-approval-note {
+    font-size: 11px;
+  }
+  .pathway-combination-row {
+    padding: 14px;
+    gap: 12px;
+  }
+  .combination-course-title {
+    font-size: 20px;
+  }
+  .combination-course-label {
+    flex-wrap: wrap;
+  }
+  .pathway-capstone-brief {
+    padding: 21px;
+  }
+}
+@media (max-width: 390px) {
+  .signature-topline > span {
+    font-size: 9px;
+  }
+  .signature-course-preview > div {
+    flex-wrap: wrap;
+  }
+  .signature-optional {
+    margin: 0 0 0 24px;
+  }
+  .pathway-combination-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pathway-combination-row > div {
+    width: 100%;
   }
 }

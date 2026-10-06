@@ -3,6 +3,8 @@ import {
   coreCourses,
   electives,
   catalogCourses,
+  catalogIndex,
+  catalogCoverage,
   pathways,
   capabilities,
   program,
@@ -22,7 +24,7 @@ unique(
   "Curated electives",
 );
 unique(
-  catalogCourses.map((course) => course.code),
+  catalogIndex.map((course) => course.code),
   "Catalog index",
 );
 unique(
@@ -56,6 +58,16 @@ for (const course of courses) {
   unique(course.tags, `${course.code} tags`);
 }
 for (const pathway of pathways) {
+  if (pathway.suggestedCombination) {
+    unique(pathway.suggestedCombination, `${pathway.id}.suggestedCombination`);
+    for (const code of pathway.suggestedCombination) {
+      const course = courses.find((entry) => entry.code === code);
+      if (!course || course.kind !== "elective")
+        problems.push(
+          `${pathway.id}.suggestedCombination: ${code} must reference an existing elective.`,
+        );
+    }
+  }
   const collections = [
     [pathway.coreCourses, coreCodes, "coreCourses"],
     [pathway.electives, electiveCodes, "electives"],
@@ -71,6 +83,44 @@ for (const pathway of pathways) {
     }
   }
 }
+if (catalogCoverage.indexedCourses !== catalogIndex.length)
+  problems.push(
+    "Catalog coverage indexedCourses differs from the actual index length.",
+  );
+if (
+  catalogCoverage.matchedCourses !==
+  catalogIndex.filter((course) => course.catalogMatches?.length).length
+)
+  problems.push(
+    "Catalog coverage matchedCourses differs from explicitly matched records.",
+  );
+if (
+  catalogCoverage.status === "complete" &&
+  (catalogCoverage.retrievedDepartments !== catalogCoverage.totalDepartments ||
+    catalogCoverage.failedDepartments.length)
+)
+  problems.push(
+    "Complete coverage requires every discovered department and no retrieval failures.",
+  );
+const fullSource = coursesSchema.parse(
+  JSON.parse(
+    readFileSync(
+      new URL("../data/catalog/source-index.json", import.meta.url),
+      "utf8",
+    ),
+  ),
+);
+unique(
+  fullSource.map((course) => course.code),
+  "Full catalog source snapshot",
+);
+if (
+  catalogCoverage.status === "complete" &&
+  fullSource.length !== catalogCoverage.totalParsedCourses
+)
+  problems.push(
+    "Complete catalog coverage must agree with the full normalized source snapshot length.",
+  );
 const requiredCore = coreCourses.filter((course) => course.kind === "core");
 const capstone = coreCourses.filter((course) => course.kind === "capstone");
 if (!requiredCore.length || capstone.length !== 1)
@@ -106,3 +156,5 @@ if (problems.length) {
       `Content review: ${pending} course records are awaiting official-source verification. Pending facts remain explicitly unknown.`,
     );
 }
+import { readFileSync } from "node:fs";
+import { coursesSchema } from "../src/lib/schema";

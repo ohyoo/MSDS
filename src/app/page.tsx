@@ -205,7 +205,9 @@ export default function Home() {
   );
   const signaturePathways = pathways.filter((pathway) => pathway.signature);
   const otherPathways = pathways.filter((pathway) => !pathway.signature);
-  const curatedCount = electivePool.filter((course) => course.msdsStatus !== "catalog-only").length;
+  const curatedCount = electivePool.filter(
+    (course) => course.msdsStatus !== "catalog-only",
+  ).length;
   const broaderCatalogCount = electivePool.length - curatedCount;
   const capstone = coreCourses.find((course) => course.kind === "capstone");
   const requiredCore = coreCourses.filter((course) => course.kind === "core");
@@ -250,6 +252,14 @@ export default function Home() {
   const capabilityDetail = capabilities.find(
     (capability) => capability.id === selectedCapability,
   );
+  const pathwayElectiveAlternatives =
+    activePathway?.electives.filter(
+      (code) => !activePathway.suggestedCombination?.includes(code),
+    ) ?? [];
+  const pathwayCatalogAlternatives =
+    activePathway?.catalogCourses.filter(
+      (code) => !activePathway.suggestedCombination?.includes(code),
+    ) ?? [];
   const closeCourse = useCallback(() => setActiveCourse(null), []);
   const closePathway = useCallback(() => setActivePathway(null), []);
   const closePlan = useCallback(() => setPlanOpen(false), []);
@@ -907,7 +917,12 @@ export default function Home() {
             {broaderCatalogCount > 0 && (
               <div className="catalog-collection-note">
                 <BookOpen size={17} />
-                <p><strong>{curatedCount} program-curated courses</strong> + <strong>{broaderCatalogCount} broader catalog courses</strong> across {departments.length} departments. Broader catalog suggestions require MSDS approval.</p>
+                <p>
+                  <strong>{curatedCount} program-curated courses</strong> +{" "}
+                  <strong>{broaderCatalogCount} broader catalog courses</strong>{" "}
+                  across {departments.length} departments. Broader catalog
+                  suggestions require MSDS approval.
+                </p>
               </div>
             )}
             {electivePool.length === 0 ? (
@@ -1096,19 +1111,76 @@ export default function Home() {
             {signaturePathways.length > 0 && (
               <div className="signature-pathways">
                 {signaturePathways.map((pathway, index) => {
-                  const Icon = pathway.id === "sports-analytics" ? Trophy : BrainCircuit;
-                  const previewCourses = pathway.electives.slice(0, pathway.electiveRange?.max ?? 3).map((code) => courses.find((course) => course.code === code)).filter((course): course is Course => !!course);
+                  const Icon =
+                    pathway.id === "sports-analytics" ? Trophy : BrainCircuit;
+                  const previewCourses = (
+                    pathway.suggestedCombination ??
+                    pathway.electives.slice(0, pathway.electiveRange?.max ?? 3)
+                  )
+                    .map((code) =>
+                      courses.find((course) => course.code === code),
+                    )
+                    .filter((course): course is Course => !!course);
                   return (
-                    <button key={pathway.id} className={`pathway-card signature-pathway ${index === 0 ? "signature-navy" : "signature-light"}`} onClick={() => setActivePathway(pathway)} aria-label={`Explore ${pathway.title} pathway`}>
-                      <div className="signature-topline"><span><Icon size={20} strokeWidth={1.5} />SIGNATURE PATHWAY CONCEPT</span><ArrowUpRight size={21} /></div>
+                    <button
+                      key={pathway.id}
+                      className={`pathway-card signature-pathway ${index === 0 ? "signature-navy" : "signature-light"}`}
+                      onClick={() => setActivePathway(pathway)}
+                      aria-label={`Explore ${pathway.title} pathway`}
+                    >
+                      <div className="signature-topline">
+                        <span>
+                          <Icon size={20} strokeWidth={1.5} />
+                          SIGNATURE PATHWAY CONCEPT
+                        </span>
+                        <ArrowUpRight size={21} />
+                      </div>
                       <h3>{pathway.title}</h3>
                       <p>{pathway.summary}</p>
-                      <div className="signature-structure"><span>{pathway.electiveRange?.min ?? 2}–{pathway.electiveRange?.max ?? 3} course planning example</span><span>+ a topical capstone</span></div>
-                      <div className="signature-course-preview">
-                        {previewCourses.map((course, courseIndex) => <div key={course.code}><span className="signature-course-number">0{courseIndex + 1}</span><div><span className="signature-course-code">{course.code}</span><span className="signature-course-title">{course.title}</span></div>{courseIndex >= (pathway.electiveRange?.min ?? 2) && <span className="signature-optional">Optional third</span>}</div>)}
+                      <div className="signature-structure">
+                        <span>
+                          {pathway.electiveRange?.min ?? 2}–
+                          {pathway.electiveRange?.max ?? 3} course planning
+                          example
+                        </span>
+                        <span>+ a topical capstone</span>
                       </div>
-                      {pathway.capstone && <div className="signature-capstone"><GraduationCap size={20} strokeWidth={1.5} /><div><span>EXAMPLE CAPSTONE DIRECTION</span><strong>{pathway.capstone.title}</strong></div></div>}
-                      <span className="signature-explore">Explore the combination <ArrowRight size={16} /></span>
+                      <div className="signature-course-preview">
+                        {previewCourses.map((course, courseIndex) => (
+                          <div key={course.code}>
+                            <span className="signature-course-number">
+                              0{courseIndex + 1}
+                            </span>
+                            <div>
+                              <span className="signature-course-code">
+                                {course.code}
+                              </span>
+                              <span className="signature-course-title">
+                                {course.title}
+                              </span>
+                              <StatusBadge course={course} />
+                            </div>
+                            {courseIndex >=
+                              (pathway.electiveRange?.min ?? 2) && (
+                              <span className="signature-optional">
+                                Optional third
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      {pathway.capstone && (
+                        <div className="signature-capstone">
+                          <GraduationCap size={20} strokeWidth={1.5} />
+                          <div>
+                            <span>EXAMPLE CAPSTONE DIRECTION</span>
+                            <strong>{pathway.capstone.title}</strong>
+                          </div>
+                        </div>
+                      )}
+                      <span className="signature-explore">
+                        Explore the combination <ArrowRight size={16} />
+                      </span>
                     </button>
                   );
                 })}
@@ -1116,7 +1188,9 @@ export default function Home() {
             )}
             <div className="pathway-grid">
               {otherPathways.map((pathway) => {
-                const index = pathways.findIndex((item) => item.id === pathway.id);
+                const index = pathways.findIndex(
+                  (item) => item.id === pathway.id,
+                );
                 const Icon = pathwayIcons[index] ?? Compass;
                 return (
                   <button
@@ -1170,6 +1244,12 @@ export default function Home() {
               Suggested pathways are exploration tools, not official
               concentrations unless explicitly identified by the MSDS program.
             </p>
+            {signaturePathways.length > 0 && (
+              <p className="signature-approval-note">
+                Three-course pathways are planning examples; any additional
+                credits or core substitutions require explicit MSDS approval.
+              </p>
+            )}
           </div>
         </section>
 
@@ -1567,6 +1647,95 @@ export default function Home() {
             <p>{activePathway.summary}</p>
           </div>
           <div className="detail-content">
+            {(activePathway.signature ||
+              activePathway.suggestedCombination?.length) && (
+              <section className="detail-section pathway-combination-section">
+                <span className="detail-section-label">
+                  <Layers size={15} />A COHERENT COURSE COMBINATION
+                </span>
+                <h3>
+                  {activePathway.electiveRange?.min ?? 2} courses, with an
+                  optional third
+                </h3>
+                <p>
+                  The standard degree includes {program.electiveCount} electives
+                  / {program.credits.electives} credits. This is a planning
+                  example to discuss with the MSDS program.
+                </p>
+                <div className="pathway-combination-list">
+                  {(
+                    activePathway.suggestedCombination ??
+                    activePathway.electives.slice(
+                      0,
+                      activePathway.electiveRange?.max ?? 3,
+                    )
+                  ).map((code, index) => {
+                    const course = courses.find((item) => item.code === code);
+                    if (!course) return null;
+                    return (
+                      <article className="pathway-combination-row" key={code}>
+                        <div>
+                          <div className="combination-course-label">
+                            <span className="course-code">{code}</span>
+                            {index >=
+                              (activePathway.electiveRange?.min ?? 2) && (
+                              <span className="combination-optional">
+                                Optional third
+                              </span>
+                            )}
+                          </div>
+                          <button
+                            className="combination-course-title"
+                            onClick={() => openCourse(course)}
+                          >
+                            {course.title}
+                            <ArrowUpRight size={14} />
+                          </button>
+                          <StatusBadge course={course} />
+                        </div>
+                        <button
+                          className={`shortlist-button ${selectedCodes.includes(code) ? "shortlisted" : ""}`}
+                          onClick={() => toggleCourse(course)}
+                          aria-label={`${selectedCodes.includes(code) ? "Remove" : "Add"} ${code} ${selectedCodes.includes(code) ? "from" : "to"} your plan`}
+                          aria-pressed={selectedCodes.includes(code)}
+                        >
+                          {selectedCodes.includes(code) ? (
+                            <Check size={14} />
+                          ) : (
+                            <Plus size={14} />
+                          )}
+                          {selectedCodes.includes(code)
+                            ? "In my plan"
+                            : "Shortlist"}
+                        </button>
+                      </article>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+            {activePathway.capstone && (
+              <section className="detail-section pathway-capstone-brief">
+                <span className="detail-section-label">
+                  <GraduationCap size={16} />
+                  TOPICAL CAPSTONE IDEA · EXAMPLE
+                </span>
+                <h3>{activePathway.capstone.title}</h3>
+                <p>{activePathway.capstone.summary}</p>
+                <ul className="application-list">
+                  {activePathway.capstone.questions.map((question) => (
+                    <li key={question}>
+                      <Lightbulb size={15} />
+                      {question}
+                    </li>
+                  ))}
+                </ul>
+                <small>
+                  This is an example project direction, not a confirmed project
+                  offering or approved capstone assignment.
+                </small>
+              </section>
+            )}
             <section className="detail-section">
               <h3>Questions you could explore</h3>
               <ul className="application-list">
@@ -1594,10 +1763,14 @@ export default function Home() {
               </div>
             </section>
             <section className="detail-section">
-              <h3>Elective possibilities</h3>
-              {activePathway.electives.length ? (
+              <h3>
+                {activePathway.suggestedCombination?.length
+                  ? "Themes & other elective possibilities"
+                  : "Elective possibilities"}
+              </h3>
+              {pathwayElectiveAlternatives.length ? (
                 <div className="related-courses">
-                  {activePathway.electives.map((code) => {
+                  {pathwayElectiveAlternatives.map((code) => {
                     const course = courses.find((item) => item.code === code);
                     return course ? (
                       <button key={code} onClick={() => openCourse(course)}>
@@ -1608,27 +1781,27 @@ export default function Home() {
                     ) : null;
                   })}
                 </div>
-              ) : (
+              ) : !activePathway.suggestedCombination?.length ? (
                 <p>
                   Course assignments are awaiting verification from the current
                   MSDS elective list. The themes below offer a starting point
                   for a conversation with the program.
                 </p>
-              )}
+              ) : null}
               <div className="course-tags detail-tags">
                 {activePathway.tags.map((tag) => (
                   <span key={tag}>{readableTag(tag)}</span>
                 ))}
               </div>
             </section>
-            {activePathway.catalogCourses.length > 0 && (
+            {pathwayCatalogAlternatives.length > 0 && (
               <section className="detail-section">
                 <h3>Explore the broader catalog</h3>
                 <p>
                   These courses are not automatically approved MSDS electives.
                 </p>
                 <div className="related-courses">
-                  {activePathway.catalogCourses.map((code) => {
+                  {pathwayCatalogAlternatives.map((code) => {
                     const course = courses.find((item) => item.code === code);
                     return course ? (
                       <button key={code} onClick={() => openCourse(course)}>
@@ -1654,6 +1827,23 @@ export default function Home() {
               elective requirements, availability, and degree-plan approval with
               the MSDS program.
             </p>
+            {activePathway.coreSubstitutionNote && (
+              <p className="detail-advisory">
+                <strong>Additional credits & core substitutions</strong>
+                <br />
+                {activePathway.coreSubstitutionNote}
+              </p>
+            )}
+            {activePathway.officialSourceUrl && (
+              <a
+                className="text-link"
+                href={activePathway.officialSourceUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Official concentration source <ExternalLink size={14} />
+              </a>
+            )}
           </div>
           <div className="modal-bottom-actions">
             <a
@@ -1662,6 +1852,9 @@ export default function Home() {
               onClick={() => {
                 setQuery("");
                 setInterests(activePathway.tags.map(readableTag));
+                setStatusFilter("all");
+                setDepartmentFilter("all");
+                setVisibleElectives(9);
                 setActivePathway(null);
               }}
             >

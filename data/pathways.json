@@ -19,17 +19,7 @@
       "CSE 5710",
       "ARE 5353"
     ],
-    "electives": [
-      "CSE 5825",
-      "CSE 5830",
-      "CSE 5820",
-      "CSE 5602",
-      "CSE 5717",
-      "OPIM 5509",
-      "OPIM 5516",
-      "OPIM 5512",
-      "GRAD 5900"
-    ],
+    "electives": ["CSE 5825", "OPIM 5509", "OPIM 5516"],
     "catalogCourses": [
       "OPIM 5515",
       "OPIM 5517",
@@ -43,7 +33,23 @@
       "Study reliability and fairness of an AI-assisted workflow"
     ],
     "careers": ["Machine learning", "AI applications", "Predictive modeling"],
-    "official": false
+    "official": false,
+    "suggestedCombination": ["CSE 5825", "OPIM 5509", "OPIM 5515"],
+    "signature": true,
+    "electiveRange": {
+      "min": 2,
+      "max": 3
+    },
+    "capstone": {
+      "title": "Reliable AI for a real decision",
+      "summary": "Example GRAD 5800 topic: compare a predictive model with a generative-AI-assisted workflow for a clearly defined domain task, including uncertainty, evaluation, and responsible use. Confirm project scope, data access, and supervision with the program.",
+      "questions": [
+        "What does the AI workflow improve compared with a statistical or computational baseline?",
+        "How will performance, uncertainty, failures, and fairness be evaluated?",
+        "Which decisions require domain expertise or human review?"
+      ]
+    },
+    "coreSubstitutionNote": "Replacing a required core course to develop a concentration is a proposal, not a verified MSDS policy. The current catalog requires all core courses; any exception needs explicit MSDS program approval."
   },
   {
     "id": "sports-analytics",
@@ -67,24 +73,36 @@
       "EPSY 5641",
       "OPIM 5605"
     ],
-    "electives": [
-      "OPIM 5604",
-      "STAT 5825",
-      "CSE 5707",
-      "STAT 5665",
-      "OPIM 5671",
-      "OPIM 5509",
-      "OPIM 5516",
-      "STAT 5675",
-      "CSE 5520"
+    "electives": ["STAT 5825", "OPIM 5604", "CSE 5707"],
+    "catalogCourses": [
+      "EDLR 5380",
+      "EDLR 5385",
+      "KINS 5522",
+      "STAT 5835",
+      "OPIM 5641"
     ],
-    "catalogCourses": ["STAT 5835", "OPIM 5641"],
     "applications": [
       "Explore sports forecasting and uncertainty",
       "Evaluate a sports decision or intervention"
     ],
     "careers": ["Sports analytics", "Performance analysis", "Forecasting"],
-    "official": false
+    "official": false,
+    "suggestedCombination": ["STAT 5825", "OPIM 5604", "EDLR 5380"],
+    "signature": true,
+    "electiveRange": {
+      "min": 2,
+      "max": 3
+    },
+    "capstone": {
+      "title": "Forecasting and decisions in a sports organization",
+      "summary": "Example GRAD 5800 topic: use publicly available or approved sports data to investigate a forecasting and decision problem, such as event demand or team-performance trends. Connect the analysis to sport-management context; confirm data access, scope, and supervision with the program.",
+      "questions": [
+        "Which sports decision will the forecast or analysis inform?",
+        "How will time dependence, uncertainty, and predictive leakage be handled?",
+        "What contextual factors or ethical constraints limit the recommendation?"
+      ]
+    },
+    "coreSubstitutionNote": "Replacing a required core course to develop a concentration is a proposal, not a verified MSDS policy. The current catalog requires all core courses; any exception needs explicit MSDS program approval."
   },
   {
     "id": "business-decision-analytics",
@@ -108,21 +126,7 @@
       "ARE 5353",
       "OPIM 5605"
     ],
-    "electives": [
-      "ARE 5311",
-      "MKTG 5115",
-      "OPIM 5604",
-      "OPIM 5512",
-      "OPIM 5504",
-      "OPIM 5502",
-      "OPIM 5510",
-      "OPIM 5671",
-      "MKTG 5220",
-      "MKTG 5250",
-      "MKTG 5251",
-      "MKTG 5655",
-      "GRAD 5900"
-    ],
+    "electives": ["OPIM 5604", "MKTG 5251", "ARE 5311"],
     "catalogCourses": ["OPIM 5515", "OPIM 5517", "OPIM 5518", "OPIM 5641"],
     "applications": [
       "Assess a business intervention",
@@ -133,7 +137,23 @@
       "Marketing analytics",
       "Decision support"
     ],
-    "official": false
+    "official": false,
+    "suggestedCombination": ["OPIM 5604", "MKTG 5251", "OPIM 5515"],
+    "signature": false,
+    "electiveRange": {
+      "min": 2,
+      "max": 3
+    },
+    "capstone": {
+      "title": "Evidence-based customer or operational decisions",
+      "summary": "Example GRAD 5800 topic: analyze a customer or operational question using predictive methods and a transparent decision framework. Compare an AI-assisted approach with a simpler baseline where appropriate, and confirm data access and supervision with the program.",
+      "questions": [
+        "What business outcome and decision are being studied?",
+        "How will predictive evidence be distinguished from a causal claim?",
+        "How should uncertainty and tradeoffs be communicated to stakeholders?"
+      ]
+    },
+    "coreSubstitutionNote": "Replacing a required core course to develop a concentration is a proposal, not a verified MSDS policy. The current catalog requires all core courses; any exception needs explicit MSDS program approval."
   },
   {
     "id": "health-biostatistics",
@@ -156,29 +176,30 @@
       "ARE 5353",
       "OPIM 5605"
     ],
-    "electives": [
-      "BIST 5625",
-      "BIST 5615",
-      "BIST 5645",
-      "BIST 5815",
-      "CSE 5800",
-      "CSE 5815",
-      "CSE 5840",
-      "CSE 5860",
-      "CSE 6800",
-      "EEB 5349",
-      "EPSY 6611",
-      "EPSY 6615",
-      "OPIM 5508",
-      "OPIM 5511"
-    ],
+    "electives": ["BIST 5625", "BIST 5645", "BIST 5815"],
     "catalogCourses": ["STAT 5835"],
     "applications": [
       "Analyze health outcomes with attention to study design",
       "Communicate uncertainty in health evidence"
     ],
     "careers": ["Health analytics", "Biostatistics", "Research analytics"],
-    "official": false
+    "official": false,
+    "suggestedCombination": ["BIST 5625", "BIST 5645", "BIST 5815"],
+    "signature": false,
+    "electiveRange": {
+      "min": 2,
+      "max": 3
+    },
+    "capstone": {
+      "title": "Health outcomes over time",
+      "summary": "Example GRAD 5800 topic: study a health-outcome question using approved, appropriately de-identified data, examining longitudinal structure or time-to-event outcomes as suitable. Confirm access, study scope, and supervision with the program.",
+      "questions": [
+        "What is the outcome, population, and observation period?",
+        "How will missing data, censoring, and repeated observations be handled?",
+        "What assumptions constrain interpretation or generalization?"
+      ]
+    },
+    "coreSubstitutionNote": "Replacing a required core course to develop a concentration is a proposal, not a verified MSDS policy. The current catalog requires all core courses; any exception needs explicit MSDS program approval."
   },
   {
     "id": "geospatial-environmental",
@@ -199,17 +220,7 @@
       "ARE 5353",
       "OPIM 5605"
     ],
-    "electives": [
-      "NRE 5215",
-      "NRE 5525",
-      "NRE 5585",
-      "NRE 5535",
-      "ARE 5438",
-      "ARE 5462",
-      "ARE 5538",
-      "EEB 5050",
-      "STAT 5845"
-    ],
+    "electives": ["NRE 5215", "NRE 5585", "STAT 5845"],
     "catalogCourses": ["NRE 5605", "NRE 5615"],
     "applications": [
       "Explore spatial patterns in environmental data",
@@ -220,7 +231,23 @@
       "Environmental data science",
       "Spatial analysis"
     ],
-    "official": false
+    "official": false,
+    "suggestedCombination": ["NRE 5215", "NRE 5585", "STAT 5845"],
+    "signature": false,
+    "electiveRange": {
+      "min": 2,
+      "max": 3
+    },
+    "capstone": {
+      "title": "Place-based environmental change and uncertainty",
+      "summary": "Example GRAD 5800 topic: combine geospatial data preparation with spatial or spatio-temporal analysis for an environmental question. Confirm the data sources, project scope, and supervision with the program.",
+      "questions": [
+        "Which spatial and temporal scales fit the environmental question?",
+        "How will spatial dependence and uncertainty be assessed?",
+        "How can maps communicate evidence without overstating precision?"
+      ]
+    },
+    "coreSubstitutionNote": "Replacing a required core course to develop a concentration is a proposal, not a verified MSDS policy. The current catalog requires all core courses; any exception needs explicit MSDS program approval."
   },
   {
     "id": "advanced-statistics",
@@ -235,18 +262,7 @@
       "longitudinal-data"
     ],
     "coreCourses": ["GRAD 5100", "STAT 5405", "STAT 5410", "EPSY 5641"],
-    "electives": [
-      "STAT 5825",
-      "STAT 5845",
-      "STAT 5665",
-      "STAT 5675",
-      "BIST 5615",
-      "BIST 5645",
-      "BIST 5815",
-      "CSE 5825",
-      "EPSY 6611",
-      "EPSY 6615"
-    ],
+    "electives": ["STAT 5675", "STAT 5825", "STAT 5665"],
     "catalogCourses": ["STAT 5835", "STAT 5865", "STAT 6615"],
     "applications": [
       "Compare modeling approaches for complex data",
@@ -257,7 +273,23 @@
       "Research analytics",
       "Quantitative analysis"
     ],
-    "official": false
+    "official": false,
+    "suggestedCombination": ["STAT 5675", "STAT 5825", "STAT 5665"],
+    "signature": false,
+    "electiveRange": {
+      "min": 2,
+      "max": 3
+    },
+    "capstone": {
+      "title": "Comparing statistical models for complex data",
+      "summary": "Example GRAD 5800 topic: compare defensible statistical approaches for a dataset with time dependence, multiple outcomes, or uncertainty that matters to a domain decision. Confirm project scope and supervision with the program.",
+      "questions": [
+        "Which model assumptions are supported by the data and study design?",
+        "How will model fit and uncertainty be compared?",
+        "What changes when assumptions or data quality are challenged?"
+      ]
+    },
+    "coreSubstitutionNote": "Replacing a required core course to develop a concentration is a proposal, not a verified MSDS policy. The current catalog requires all core courses; any exception needs explicit MSDS program approval."
   },
   {
     "id": "computing-systems",
@@ -273,28 +305,29 @@
       "data-engineering"
     ],
     "coreCourses": ["GRAD 5100", "STAT 5410", "CSE 5709", "CSE 5710"],
-    "electives": [
-      "CSE 5050",
-      "CSE 5707",
-      "CSE 5717",
-      "CSE 5850",
-      "CSE 5103",
-      "CSE 5304",
-      "CSE 5500",
-      "CSE 5506",
-      "CSE 5510",
-      "CSE 5512",
-      "CSE 5852",
-      "CSE 5854",
-      "CSE 6512",
-      "OPIM 5502"
-    ],
+    "electives": ["CSE 5050", "CSE 5304", "CSE 5707"],
     "catalogCourses": ["OPIM 5517", "CSE 5250"],
     "applications": [
       "Evaluate computational approaches to an analytical problem",
       "Prototype a reproducible data processing workflow"
     ],
     "careers": ["Data engineering", "Computational analytics", "Optimization"],
-    "official": false
+    "official": false,
+    "suggestedCombination": ["CSE 5050", "CSE 5304", "CSE 5707"],
+    "signature": false,
+    "electiveRange": {
+      "min": 2,
+      "max": 3
+    },
+    "capstone": {
+      "title": "An efficient, reproducible analytics system",
+      "summary": "Example GRAD 5800 topic: prototype a reproducible computational workflow for an analytical or optimization task and evaluate performance, reliability, and usefulness. Confirm scope, infrastructure, and supervision with the program.",
+      "questions": [
+        "Which computational bottleneck or decision problem is being addressed?",
+        "How will correctness, runtime, resource use, and reproducibility be evaluated?",
+        "How can a domain user understand and use the resulting system?"
+      ]
+    },
+    "coreSubstitutionNote": "Replacing a required core course to develop a concentration is a proposal, not a verified MSDS policy. The current catalog requires all core courses; any exception needs explicit MSDS program approval."
   }
 ]

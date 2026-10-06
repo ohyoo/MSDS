@@ -1,5 +1,6 @@
-import { coreCourses, pathways, program } from "./data";
-import type { Course } from "./schema";
+import { coreCourses, courses, pathways, program } from "./data";
+import { recommendCourses, SPORTS_DOMAIN_TAGS } from "./recommendations";
+import type { Course, Pathway } from "./schema";
 import { humanizeTag } from "./search";
 
 export type PlanAnalysis = {
@@ -23,6 +24,7 @@ const domainTags = new Set([
   "environment",
   "environmental",
   "gis",
+  ...SPORTS_DOMAIN_TAGS,
 ]);
 const aiTags = new Set([
   "ai",
@@ -33,6 +35,81 @@ const aiTags = new Set([
   "nlp",
   "reinforcement-learning",
 ]);
+
+export type PathwayProposal = {
+  pathway: Pathway;
+  courses: Course[];
+  capstone: NonNullable<Pathway["capstone"]> | null;
+  coreSubstitutionNote: string;
+};
+
+/** Prefer the reviewed local combination; never turn a required core into an elective. */
+export function proposePathway(
+  pathwayId: string,
+  candidateCourses: Course[] = courses,
+): PathwayProposal | null {
+  const pathway = pathways.find((item) => item.id === pathwayId);
+  if (!pathway) return null;
+  const mappedCodes = new Set([
+    ...pathway.electives,
+    ...pathway.catalogCourses,
+    ...(pathway.suggestedCombination ?? []),
+  ]);
+  const candidates = [
+    ...new Map(
+      candidateCourses
+        .filter(
+          (course) =>
+            course.kind === "elective" &&
+            (mappedCodes.has(course.code) ||
+              course.pathways.includes(pathwayId)),
+        )
+        .map((course) => [course.code, course]),
+    ).values(),
+  ];
+  const count = Math.min(
+    3,
+    Math.max(
+      2,
+      pathway.suggestedCombination?.length ?? pathway.electiveRange?.max ?? 3,
+    ),
+  );
+  const chosen = (pathway.suggestedCombination ?? [])
+    .map((code) => candidates.find((course) => course.code === code))
+    .filter((course): course is Course => Boolean(course))
+    .slice(0, count);
+  const ranked = recommendCourses(pathway.title, [], candidates);
+  while (chosen.length < count) {
+    const usedTags = new Set(chosen.flatMap((course) => course.tags));
+    const next = ranked
+      .filter(({ course }) => !chosen.some((item) => item.code === course.code))
+      .map((item) => ({
+        ...item,
+        portfolioScore:
+          item.score +
+          Math.min(
+            6,
+            item.course.tags.filter((tag) => !usedTags.has(tag)).length * 2,
+          ) -
+          (item.course.sourceVerification === "pending" ? 10 : 0),
+      }))
+      .sort(
+        (a, b) =>
+          b.portfolioScore - a.portfolioScore ||
+          a.course.code.localeCompare(b.course.code),
+      )[0];
+    if (!next) break;
+    chosen.push(next.course);
+  }
+  return {
+    pathway,
+    courses: chosen,
+    capstone: pathway.capstone ?? null,
+    coreSubstitutionNote:
+      pathway.coreSubstitutionNote ??
+      "The recorded core courses remain required. Any potential core substitution is an unconfirmed proposal requiring explicit MSDS program approval; this tool cannot establish course equivalence or waive a requirement.",
+  };
+}
 
 /** Advisory interpretations of a shortlist, never a formal degree audit. */
 export function analyzePlan(selected: Course[]): PlanAnalysis {
@@ -183,9 +260,26 @@ export function analyzePlan(selected: Course[]): PlanAnalysis {
       `A possible pathway identity is ${suggested.title}. ${suggested.official ? "Check its documented program requirements." : "This is a suggested exploration pathway, not an official concentration."} Application ideas include ${suggested.applications.slice(0, 2).join("; ").toLowerCase()}.`,
     );
 
+  if (unique.length >= 2 && unique.length <= 3 && suggested) {
+    const signature = suggested;
+    const topicalCapstone =
+      signature.capstone?.title ?? suggested.applications[0];
+    comments.push(
+      `These ${unique.length} candidates can form an exploratory ${suggested.title} concentration example with a topical capstone${topicalCapstone ? `: ${topicalCapstone}` : ""}. This is a proposed learning combination, not an official or approved concentration.`,
+    );
+    if (signature.capstone?.questions[0])
+      comments.push(
+        `Capstone question to explore: ${signature.capstone.questions[0]} The project topic and data access still need supervisor/program confirmation.`,
+      );
+  }
+
   if (unique.length > program.electiveCount)
     warnings.push(
       `You have ${unique.length} candidates. Keep this shortlist while exploring, then narrow it to the ${program.electiveCount}-elective / ${program.credits.electives}-credit component with the MSDS program.`,
+    );
+  if (unique.length === 3)
+    warnings.push(
+      `A 3-course concentration example extends beyond the current ${program.electiveCount}-elective / ${program.credits.electives}-credit component. A third course or any proposed core substitution needs explicit MSDS program approval; the recorded required core remains unchanged.`,
     );
   if (unique.length === program.electiveCount) {
     if (unique.some((course) => course.credits === null))

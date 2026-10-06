@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { analyzePlan } from "../../src/lib/plan";
+import { analyzePlan, proposePathway } from "../../src/lib/plan";
+import { courses } from "../../src/lib/data";
 import { fixtureCourse, testCourses } from "./fixtures";
 
 describe("elective shortlist analysis", () => {
@@ -59,5 +60,58 @@ describe("elective shortlist analysis", () => {
     expect(analyzePlan([testCourses[0], testCourses[0]]).headline).toBe(
       "One course, a starting direction.",
     );
+  });
+
+  it("connects sports-domain knowledge to methods and a topical capstone", () => {
+    const domain = fixtureCourse({
+      code: "TEST 9921",
+      title: "Sport Management",
+      tags: ["sports-management", "sport-policy"],
+      pathways: ["sports-analytics"],
+    });
+    const analysis = analyzePlan([domain, testCourses[0]]);
+    expect(analysis.comments.join(" ")).toMatch(/connects methods/);
+    expect(analysis.comments.join(" ")).toMatch(/sports management/);
+    expect(analysis.comments.join(" ")).toMatch(/topical capstone/);
+    expect(analysis.comments.join(" ")).toMatch(
+      /not an official or approved concentration/,
+    );
+  });
+
+  it("treats a three-course concentration example as a proposal beyond the current elective requirement", () => {
+    const analysis = analyzePlan(testCourses.slice(0, 3));
+    expect(analysis.comments.join(" ")).toMatch(
+      /3 candidates.*concentration example/,
+    );
+    expect(analysis.warnings.join(" ")).toMatch(
+      /extends beyond.*2-elective \/ 6-credit/,
+    );
+    expect(analysis.warnings.join(" ")).toMatch(
+      /core substitution needs explicit MSDS program approval/,
+    );
+    expect(analysis.warnings.join(" ")).toMatch(
+      /required core remains unchanged/,
+    );
+  });
+
+  it("builds signature examples from two or three distinct local electives", () => {
+    for (const id of ["ai-machine-learning", "sports-analytics"]) {
+      const proposal = proposePathway(id);
+      expect(proposal).not.toBeNull();
+      expect(proposal!.courses.length).toBeGreaterThanOrEqual(2);
+      expect(proposal!.courses.length).toBeLessThanOrEqual(3);
+      expect(new Set(proposal!.courses.map((course) => course.code)).size).toBe(
+        proposal!.courses.length,
+      );
+      expect(
+        proposal!.courses.every(
+          (course) =>
+            course.kind === "elective" &&
+            courses.some((known) => known.code === course.code),
+        ),
+      ).toBe(true);
+      expect(proposal!.coreSubstitutionNote).toMatch(/approval/i);
+      expect(proposal!.pathway.official).toBe(false);
+    }
   });
 });

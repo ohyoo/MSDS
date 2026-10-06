@@ -8,7 +8,7 @@ A standalone Next.js App Router application with strict TypeScript, React, Tailw
 
 `data/core-courses.json`, `electives.json`, `pathways.json`, `capabilities.json`, and `program.json` are independently editable. Every course retains official description, optional interpretive student summary, prerequisites, credits, provenance, verification state, and last-check date. Catalog facts take priority; the MSDS website determines recommended versus specialty membership. Unknown facts remain null. Catalog-discovered courses always remain distinct from program-curated electives.
 
-Source discovery completed on 2026-10-06. The initially empty checkout contained no spreadsheets or instructor descriptions. After resolving the environment's initial network restriction, the MSDS course page, official degree catalog, course index, home page, and ten departmental catalogs were retrieved. The app contains nine required courses with verified catalog facts, all 21 recommended and 39 specialty electives from the main MSDS curriculum sections, and ten reviewed broader-catalog candidates. The catalog confirms the 30/21/6/3-credit structure. Five program-listed specialty courses are absent from current departmental catalogs and retain pending official metadata. GRAD 5900 is a generic special-topics catalog entry with variable credits; the program's Applied Generative AI label is clearly attributed rather than substituted for its official title. See `docs/DATA.md` for the source differences and program-review items.
+Source discovery completed on 2026-10-06. The initially empty checkout contained no spreadsheets or instructor descriptions. After resolving the initial network restriction, the MSDS course page, degree catalog, course index, home page, and all 96 discovered graduate department catalogs were retrieved. A complete maintenance-only source snapshot retains 2,797 graduate records. The student index contains 202 explicit AI/ML/advanced-statistics/sports topic matches plus one retained reviewed contextual option; program-curated precedence produces 245 visible courses: nine required, 60 curated electives, and 176 catalog-only options. Coverage is complete for discovered pages, while topic relatedness remains interpretive. The catalog confirms the 30/21/6/3-credit structure. Five program-listed specialty courses retain pending official metadata. GRAD 5900 preserves the catalog's generic special-topics title and variable credits, with the program's Applied Generative AI label clearly attributed. See `docs/DATA.md` for source conflicts, rules, and review items.
 
 ## Page hierarchy
 
@@ -16,7 +16,7 @@ Source discovery completed on 2026-10-06. The initially empty checkout contained
 - Core: course details separating official descriptions and interpretive summaries.
 - Explore: free-text interests, combined chips, ranking reasons, category filters, and shortlist actions.
 - My Plan: persistent course-code-only shortlist, comparison, breadth, overlap, and prerequisite reminders.
-- Pathways: seven suggested, data-driven examples with core foundations, electives, applications, and careers; no official concentration claim.
+- Pathways: seven suggested, data-driven examples with two- or three-course combinations, core foundations, topical capstone examples, applications, and careers; AI and Sports signature examples; no official concentration or core-substitution policy claim.
 - Guide: source-linked deterministic answers and optional server-side model enhancement.
 
 ## Recommendations
@@ -29,7 +29,7 @@ The default rules-based guide uses validated records. Deterministic retrieval su
 
 ## Deployment
 
-Use a normal Node.js Next.js deployment or Vercel. Cloudflare full-server deployments require its Next.js adapter; a static export can be a future variant if the optional API route is removed. Document this tradeoff rather than claiming an untested host configuration. Save reusable local startup and readiness instructions.
+Publish the static Next.js export to GitHub Pages using the requested repository base path. The deterministic guide runs locally without a server or API key. A separate optional server adapter can provide model enhancement on a compatible Node/serverless host; it is not required for the Pages experience. Document this tradeoff and save reusable local startup and readiness instructions.
 
 ## Implementation cycles
 

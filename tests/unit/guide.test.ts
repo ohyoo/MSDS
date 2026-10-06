@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { answerGuide } from "../../src/lib/guide";
-import { coreCourses, program } from "../../src/lib/data";
+import { coreCourses, courses, program } from "../../src/lib/data";
 import { testCourses } from "./fixtures";
 
 describe("grounded deterministic curriculum guide", () => {
@@ -90,5 +90,61 @@ describe("grounded deterministic curriculum guide", () => {
           source.url === "https://catalog.uconn.edu/graduate/courses/",
       ),
     ).toBe(true);
+  });
+
+  it("routes core replacement requests to explicit approval guidance instead of claiming equivalence", () => {
+    const result = answerGuide(
+      "Can I replace STAT 5405 with CSE 5825 for an AI concentration?",
+    );
+    expect(result.answer).toMatch(/core curriculum remains required/);
+    expect(result.answer).toMatch(/requiring explicit MSDS program approval/);
+    expect(result.answer).toMatch(/cannot.*establish equivalence/);
+    expect(result.answer).toMatch(/not an official or approved concentration/);
+    expect(
+      result.sources.some((source) => source.label.startsWith("STAT 5405:")),
+    ).toBe(true);
+    expect(
+      answerGuide("Can advanced statistics count as a required core course?")
+        .answer,
+    ).toMatch(/core curriculum remains required/);
+    expect(
+      answerGuide("Could STAT 5405 be replaced by advanced methods?").answer,
+    ).toMatch(/cannot waive a requirement/);
+  });
+
+  it("gives proposed AI and Sports course combinations with capstone ideas and verified source links", () => {
+    for (const question of [
+      "Show me an AI pathway",
+      "Show me a Sports concentration",
+    ]) {
+      const result = answerGuide(question);
+      expect(result.suggestedCourses.length).toBeGreaterThanOrEqual(2);
+      expect(result.suggestedCourses.length).toBeLessThanOrEqual(3);
+      expect(result.answer).toMatch(/Topical capstone idea/);
+      expect(result.answer).toMatch(
+        /not an official or approved concentration/,
+      );
+      expect(result.answer).toMatch(/2 electives \/ 6 elective credits/);
+      expect(result.answer).toMatch(
+        /third elective.*explicit program approval/,
+      );
+      for (const code of result.suggestedCourses) {
+        const course = courses.find((item) => item.code === code);
+        expect(course?.kind).toBe("elective");
+        expect(
+          result.sources.some((source) => source.url === course?.sourceUrl),
+        ).toBe(true);
+      }
+      expect(
+        result.sources.some((source) => source.label.startsWith("GRAD 5800:")),
+      ).toBe(true);
+    }
+  });
+
+  it("distinguishes signature proposals from official concentrations in a general question", () => {
+    const result = answerGuide("What concentrations does MSDS offer?");
+    expect(result.answer).toMatch(/no documented official MSDS concentrations/);
+    expect(result.answer).toMatch(/AI and Sports signature pathways/);
+    expect(result.answer).toMatch(/required core remains in place/);
   });
 });

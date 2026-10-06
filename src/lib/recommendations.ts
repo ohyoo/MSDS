@@ -24,7 +24,45 @@ export const RECOMMENDATION_WEIGHTS = {
   interestCoverage: 4,
   fuzzy: 3,
   programCurated: 0.5,
+  sportsDomain: 6,
+  sportsSpecificity: 8,
+  sportsMethodsPortfolio: 8,
+  sportsContextPortfolio: 4,
+  researchShellPenalty: 12,
 } as const;
+
+export const SPORTS_DOMAIN_TAGS = new Set([
+  "sports",
+  "sport",
+  "sports-management",
+  "sport-management",
+  "sports-leadership",
+  "sport-leadership",
+  "athletics",
+  "sport-policy",
+  "sports-policy",
+  "sports-marketing",
+  "sport-marketing",
+  "kinesiology",
+  "sports-governance",
+  "sport-governance",
+]);
+
+const sportsMethodTags = new Set([
+  "prediction",
+  "predictive-modeling",
+  "machine-learning",
+  "time-series",
+  "forecasting",
+  "causal-inference",
+  "optimization",
+]);
+
+function isResearchShell(course: Course): boolean {
+  return /\b(capstone|thesis|dissertation|independent study|independent studies|directed study|directed studies|current research)\b/.test(
+    normalizeSearch(course.title),
+  );
+}
 
 type InterestGroup = {
   id: string;
@@ -87,9 +125,31 @@ export const INTEREST_GROUPS: InterestGroup[] = [
   {
     id: "sports",
     label: "sports analytics",
-    aliases: ["sport", "sports", "sports analytics", "athletics"],
+    aliases: [
+      "sport",
+      "sports",
+      "sports analytics",
+      "athletics",
+      "sports management",
+      "sport management",
+      "sports leadership",
+      "sport leadership",
+      "kinesiology",
+    ],
     concepts: [
       "sports",
+      "sport",
+      "sports-management",
+      "sport-management",
+      "sports-leadership",
+      "sport-leadership",
+      "athletics",
+      "sport-policy",
+      "sports-policy",
+      "sports-marketing",
+      "sport-marketing",
+      "kinesiology",
+      "sport-governance",
       "predictive-modeling",
       "prediction",
       "time-series",
@@ -307,10 +367,18 @@ function interestGroups(text: string): InterestGroup[] {
     /\b(generative ai|gen ai)\b/g,
     " ",
   );
+  const withoutSportsBusinessPhrase = normalized.replace(
+    /\bsports? (management|leadership|marketing|policy)\b/g,
+    " ",
+  );
   return INTEREST_GROUPS.filter((group) =>
     group.aliases.some((alias) =>
       containsPhrase(
-        group.id === "machine-learning" ? withoutGenerativePhrase : normalized,
+        group.id === "machine-learning"
+          ? withoutGenerativePhrase
+          : group.id === "business"
+            ? withoutSportsBusinessPhrase
+            : normalized,
         alias,
       ),
     ),
@@ -368,6 +436,11 @@ export function recommendCourses(
   const text = [query, ...interests].join(" ");
   const normalized = normalizeSearch(text);
   const groups = interestGroups(text);
+  const sportsFocus = containsPhrase(text, "kinesiology")
+    ? "kinesiology"
+    : (/\bsports? (management|leadership|marketing|policy)\b/.exec(
+        normalized,
+      )?.[1] ?? null);
   const terms = searchTerms(text);
   const electiveCourses = courses.filter(
     (course) => course.kind === "elective",
@@ -405,7 +478,7 @@ export function recommendCourses(
     }
   }
 
-  return electiveCourses
+  const results = electiveCourses
     .map((course): Recommendation => {
       let score = 0;
       const reasons: string[] = [];
@@ -446,10 +519,36 @@ export function recommendCourses(
                 .map((match) => humanizeTag(match.concept)),
             ),
           ].join(", ") || "Related curriculum themes";
+        const sportsDomain =
+          group.id === "sports" &&
+          matches.some(
+            (match) =>
+              SPORTS_DOMAIN_TAGS.has(match.concept) &&
+              (match.source === "course tags" ||
+                match.source === "course title"),
+          );
+        if (sportsDomain && sportsFocus)
+          score += RECOMMENDATION_WEIGHTS.sportsDomain;
+        const sportsSpecific =
+          group.id === "sports" &&
+          sportsFocus &&
+          (sportsFocus === "kinesiology"
+            ? course.department === "KINS" ||
+              course.tags.includes("kinesiology")
+            : containsPhrase(course.title, sportsFocus) ||
+              course.tags.some((tag) => containsPhrase(tag, sportsFocus)));
+        if (sportsSpecific) {
+          score += RECOMMENDATION_WEIGHTS.sportsSpecificity;
+          reasons.push(
+            `Direct ${sportsFocus} evidence in ${course.department === "KINS" && sportsFocus === "kinesiology" ? "the Kinesiology department" : "the course title or tags"} adds specificity to your sports interest.`,
+          );
+        }
         reasons.push(
-          group.id === "sports"
-            ? `${skills[0].toUpperCase()}${skills.slice(1)} can support sports forecasting or performance decisions; this is a methods connection, not a sports-specific course claim.`
-            : `Matches ${group.label} through ${skills} (${matches[0].source}).`,
+          sportsDomain
+            ? `Matches the sports domain through ${skills} (${matches[0].source}). Pair domain knowledge with prediction, evaluation, or decision methods for an analytics pathway.`
+            : group.id === "sports"
+              ? `${skills[0].toUpperCase()}${skills.slice(1)} can support sports forecasting or performance decisions; this is a methods connection, not a sports-specific course claim.`
+              : `Matches ${group.label} through ${skills} (${matches[0].source}).`,
         );
       }
 
@@ -502,6 +601,19 @@ export function recommendCourses(
       } else if (score > 0 && course.msdsStatus === "recommended") {
         score += RECOMMENDATION_WEIGHTS.programCurated;
       }
+      if (
+        score > 0 &&
+        isResearchShell(course) &&
+        !containsPhrase(normalized, course.code)
+      ) {
+        score = Math.max(
+          0.1,
+          score - RECOMMENDATION_WEIGHTS.researchShellPenalty,
+        );
+        reasons.push(
+          "Ranked lower because this is a capstone, thesis, or research/study shell rather than a standard taught elective; check its program-specific eligibility and project arrangements.",
+        );
+      }
       return {
         course,
         score: Math.round(score * 100) / 100,
@@ -513,4 +625,67 @@ export function recommendCourses(
     .sort(
       (a, b) => b.score - a.score || a.course.code.localeCompare(b.course.code),
     );
+
+  // A broad sports-analytics request needs both useful analytical tools and a
+  // domain perspective. Give the best two methods and one taught domain course
+  // explicit, bounded portfolio bonuses; domain-specific requests use evidence
+  // specificity above instead. Shell courses remain indexed but get no bonus.
+  if (groups.some((group) => group.id === "sports") && !sportsFocus) {
+    const methodCandidates = results.filter(
+      ({ course }) =>
+        !isResearchShell(course) &&
+        !course.tags.some((tag) => SPORTS_DOMAIN_TAGS.has(tag)) &&
+        course.tags.some((tag) => sportsMethodTags.has(tag)),
+    );
+    const methods = methodCandidates.slice(0, 1);
+    const firstMethodTags = new Set(
+      methods[0]?.course.tags.filter((tag) => sportsMethodTags.has(tag)) ?? [],
+    );
+    const complementaryMethod = methodCandidates
+      .slice(1)
+      .map((item) => ({
+        item,
+        selectionScore:
+          item.score +
+          Math.min(
+            6,
+            item.course.tags.filter(
+              (tag) => sportsMethodTags.has(tag) && !firstMethodTags.has(tag),
+            ).length * 3,
+          ),
+      }))
+      .sort(
+        (a, b) =>
+          b.selectionScore - a.selectionScore ||
+          a.item.course.code.localeCompare(b.item.course.code),
+      )[0]?.item;
+    if (complementaryMethod) methods.push(complementaryMethod);
+    const context = results.find(
+      ({ course }) =>
+        !isResearchShell(course) &&
+        course.tags.some((tag) => SPORTS_DOMAIN_TAGS.has(tag)),
+    );
+    for (const method of methods) {
+      method.score =
+        Math.round(
+          (method.score + RECOMMENDATION_WEIGHTS.sportsMethodsPortfolio) * 100,
+        ) / 100;
+      method.reasons.push(
+        "A sports-analytics portfolio bonus highlights a leading analytical-methods option alongside domain context.",
+      );
+    }
+    if (context) {
+      context.score =
+        Math.round(
+          (context.score + RECOMMENDATION_WEIGHTS.sportsContextPortfolio) * 100,
+        ) / 100;
+      context.reasons.push(
+        "A sports-context portfolio bonus highlights one taught domain option alongside analytical methods.",
+      );
+    }
+    results.sort(
+      (a, b) => b.score - a.score || a.course.code.localeCompare(b.course.code),
+    );
+  }
+  return results;
 }

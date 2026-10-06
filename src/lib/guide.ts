@@ -1,5 +1,5 @@
-import { coreCourses, courses, program } from "./data";
-import { analyzePlan } from "./plan";
+import { coreCourses, courses, pathways, program } from "./data";
+import { analyzePlan, proposePathway, type PathwayProposal } from "./plan";
 import { recommendCourses } from "./recommendations";
 import type { Course } from "./schema";
 import { normalizeSearch } from "./search";
@@ -38,6 +38,24 @@ function summarizeCourse(course: Course): string {
   return `${course.code} — ${course.title}. ${studentSummary} ${facts} ${prerequisite}`;
 }
 
+function describeProposal(proposal: PathwayProposal): string {
+  const example = proposal.courses
+    .map((course) => {
+      const category =
+        course.msdsStatus === "recommended"
+          ? "MSDS recommended"
+          : course.msdsStatus === "specialty"
+            ? "MSDS specialty elective"
+            : "broader catalog; degree applicability requires confirmation";
+      return `${course.code} — ${course.title} (${category}${course.sourceVerification === "pending" ? "; official metadata awaits verification" : ""})`;
+    })
+    .join("; ");
+  const capstone = proposal.capstone
+    ? `Topical capstone idea: ${proposal.capstone.title}. ${proposal.capstone.summary}${proposal.capstone.questions[0] ? ` Example question: ${proposal.capstone.questions[0]}` : ""}`
+    : `Topical capstone idea: ${proposal.pathway.applications[0] ?? "Connect the selected methods and domain knowledge in an applied project"}.`;
+  return `Proposed ${proposal.pathway.title} concentration example: ${proposal.courses.length >= 2 ? `${proposal.courses.length} candidate electives — ${example}.` : "The local index does not yet contain enough mapped electives for a 2–3-course example."} Review the linked prerequisites, enrollment restrictions, and current availability before planning.\n\n${capstone} Capstone supervision, suitable data access, and project scope need confirmation.\n\nThis 2–3-elective model is an exploratory proposal, not an official or approved concentration. The current program has ${program.electiveCount} electives / ${program.credits.electives} elective credits; a third elective or a different degree structure requires explicit program approval. ${proposal.coreSubstitutionNote}`;
+}
+
 /**
  * A grounded, rules-based guide requiring no account, student profile, or AI key.
  * Responses are derived only from local course/pathway/program records. This is
@@ -65,6 +83,35 @@ export function answerGuide(
     /\b(approved|approval|guarantee|guaranteed|count toward|count towards|counts toward|counts towards|will count|can i take|allowed to take|fulfill|fulfil|satisfy|eligible|eligibility|admitted)\b/.test(
       normalized,
     );
+  const coreSubstitution =
+    /\b(replace(?:d|ment)?|substitut(?:e|es|ed|ing|ion|ions)|swap|waiv(?:e|ed|er)|skip|instead of|count as|exempt|exemption)\b/.test(
+      normalized,
+    ) &&
+    (/\b(core|required|requirement|requirements)\b/.test(normalized) ||
+      mentionedCourses.some((course) => course.kind === "core"));
+  const signatureId = /\b(sports?|athletics|kinesiology)\b/.test(normalized)
+    ? "sports-analytics"
+    : /\b(ai|genai|gen ai|generative ai|artificial intelligence|machine learning|deep learning)\b/.test(
+          normalized,
+        )
+      ? "ai-machine-learning"
+      : null;
+  if (coreSubstitution) {
+    const proposal = signatureId ? proposePathway(signatureId) : null;
+    return {
+      answer: `The recorded core curriculum remains required. A potential core substitution is an unconfirmed proposal requiring explicit MSDS program approval; I cannot waive a requirement, establish equivalence, or confirm that substitutions are permitted. Bring the named courses, their official descriptions, and your proposed learning goals to the MSDS program/advisor for a formal decision.${proposal ? `\n\n${describeProposal(proposal)}` : ""}${availability ? "\n\nThe local index also does not establish current semester offerings or enrollment availability." : ""}`,
+      sources: sourcesFor([
+        ...discussionCourses,
+        ...(proposal?.courses ?? []),
+        ...coreCourses.filter((course) => course.kind === "capstone"),
+      ]),
+      suggestedCourses:
+        proposal?.courses.map((course) => course.code) ??
+        mentionedCourses
+          .filter((course) => course.kind === "elective")
+          .map((course) => course.code),
+    };
+  }
   if (availability || approval) {
     const guardrails: string[] = [];
     if (availability)
@@ -105,17 +152,45 @@ export function answerGuide(
     };
   }
 
-  if (
+  const shortlistRequest =
+    discussionCourses.length > 0 &&
     /\b(overlap|combination|shortlist|my plan|these two|complement|compare my)\b/.test(
       normalized,
+    );
+  if (
+    /\b(pathway|concentration|concentrations|specialization|specialisation|capstone)\b/.test(
+      normalized,
     ) &&
-    discussionCourses.length
+    !shortlistRequest
   ) {
+    if (signatureId) {
+      const proposal = proposePathway(signatureId);
+      if (proposal)
+        return {
+          answer: describeProposal(proposal),
+          sources: sourcesFor([
+            ...proposal.courses,
+            ...coreCourses.filter((course) => course.kind === "capstone"),
+          ]),
+          suggestedCourses: proposal.courses.map((course) => course.code),
+        };
+    }
+    if (/\b(concentration|concentrations)\b/.test(normalized)) {
+      const official = pathways.filter((pathway) => pathway.official);
+      return {
+        answer: `${official.length ? `Only explicitly documented program concentrations may be treated as official: ${official.map((pathway) => pathway.title).join(", ")}.` : "The local index contains no documented official MSDS concentrations."} The AI and Sports signature pathways are proposed 2–3-elective combinations with topical capstone ideas, not official or approved concentrations. The current required core remains in place, and the standard elective component is ${program.electiveCount} electives / ${program.credits.electives} credits. A third elective or any potential core substitution requires explicit MSDS program review and approval. Ask about an AI or Sports pathway to explore its local course example.`,
+        sources: sourcesFor(),
+        suggestedCourses: [],
+      };
+    }
+  }
+
+  if (shortlistRequest) {
     const analysis = analyzePlan(discussionCourses);
     return {
       answer: [
         analysis.headline,
-        ...analysis.comments.slice(0, 4),
+        ...analysis.comments.slice(0, 6),
         ...analysis.warnings.slice(0, 2),
         "These comments are exploratory guidance, not formal academic approval.",
       ].join("\n\n"),

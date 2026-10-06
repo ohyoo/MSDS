@@ -54,6 +54,23 @@ describe("graduate catalog metadata parser", () => {
     },
   );
 
+  it.each([0, 1.5])(
+    "preserves an explicitly stated %s-credit value",
+    (credits) => {
+      const html = `
+      <div class="courseblock" data-coursecode="TEST 9001">
+        <span class="detail-code">TEST 9001</span>
+        <span class="detail-title">Fictional Graduate Activity</span>
+        <span class="detail-hours_html">${credits} Credits</span>
+      </div>`;
+
+      const [course] = parseCatalogPage(html, sourceUrl, checkedOn);
+
+      expect(course.credits).toBe(credits);
+      expect(course.graduateLevel).toBe(9000);
+    },
+  );
+
   it("keeps consent, prerequisites, and enrollment restrictions verbatim", () => {
     const requirements =
       "Prerequisites: TEST 5001 or consent of instructor. Open only to graduate students. Recommended preparation: linear algebra.";
@@ -93,12 +110,13 @@ describe("graduate catalog metadata parser", () => {
     });
   });
 
-  it("indexes only identified 5000/6000-level courses and preserves department codes and suffixes", () => {
+  it("indexes every identified graduate level from 5000 upward and preserves department codes and suffixes", () => {
     const blocks = [
       ["TEST 4999", "Fictional Undergraduate Course"],
       ["TEST 5000", "Fictional Graduate Course"],
       ["MOCK 6000W", "Fictional Graduate Writing Course"],
-      ["TEST 7000", "Outside the Selected Level Range"],
+      ["TEST 7000", "Fictional Doctoral Course"],
+      ["MOCK 8999", "Fictional Advanced Doctoral Course"],
       ["not a course code", "Unidentified Block"],
     ]
       .map(
@@ -115,10 +133,17 @@ describe("graduate catalog metadata parser", () => {
     expect(courses.map(({ code }) => code)).toEqual([
       "TEST 5000",
       "MOCK 6000W",
+      "TEST 7000",
+      "MOCK 8999",
     ]);
     expect(courses.map(({ department }) => department)).toEqual([
       "TEST",
       "MOCK",
+      "TEST",
+      "MOCK",
+    ]);
+    expect(courses.map(({ graduateLevel }) => graduateLevel)).toEqual([
+      5000, 6000, 7000, 8000,
     ]);
   });
 

@@ -4,7 +4,11 @@ The application is a standalone, static-exported Next.js site that can be linked
 
 ## Release prerequisites
 
-Use Node.js 22 or later. Review academic content before publishing an official advising resource: confirm source freshness, recommended versus specialty elective membership, and program review of interpretive summaries and pathway mappings. Per-record `sourceVerification` and `lastChecked` distinguish verified metadata from pending facts; unknown requirements remain unknown.
+Use Node.js 22 or later. Review academic content before publishing an official advising resource: confirm source freshness, recommended versus specialty elective membership, and program review of interpretive summaries, broader-catalog keyword matches, and pathway mappings. Per-record `sourceVerification` and `lastChecked` distinguish verified metadata from pending facts; unknown requirements remain unknown.
+
+The complete catalog retrieval covers 96 departments and 2,797 graduate records numbered 5000 or above. Keep `source-index.json` as maintenance metadata outside client imports; only the filtered discovery index and coverage data belong in the browser. Full retrieval coverage does not make the topic filter an exhaustive academic classification.
+
+The two signature suggestions (AI & Machine Learning and Sports Analytics) and the five other templates are exploratory pathways, not official concentrations. Their two- or three-course combinations and capstone briefs retain the current eight-course / 21-credit core, two-elective / 6-credit requirement, and 3-credit capstone. Review visible approval language for any optional third course or proposed core substitution before release.
 
 Build and validate the exact checkout to be deployed:
 

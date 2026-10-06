@@ -24,7 +24,7 @@ export function parseCatalogPage(
     const codeMatch = (block.attr("data-coursecode") || heading).match(
       /^([A-Z]{2,6})\s+(\d{4}[A-Z]?)\b/,
     );
-    if (!codeMatch || !/^[56]/.test(codeMatch[2])) return;
+    if (!codeMatch || Number(codeMatch[2].slice(0, 4)) < 5000) return;
 
     const creditText =
       clean(
@@ -90,6 +90,7 @@ export function parseCatalogPage(
       sourceType: "catalog",
       lastChecked,
       sourceVerification: "verified",
+      graduateLevel: Number(codeMatch[2].slice(0, 1)) * 1000,
     });
   });
   return parsed;

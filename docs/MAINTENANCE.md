@@ -8,7 +8,11 @@ The Graduate Catalog is the source of record for titles, credits, descriptions, 
 
 Every course preserves `sourceUrl`, `sourceType`, `lastChecked`, `sourceVerification`, `officialDescription`, and an optional `studentDescription`. Pending facts remain `null`. A missing prerequisite statement means **unknown**, never “no prerequisites.” Course existence does not establish semester availability, delivery mode, or degree approval.
 
-The initial official-source check was completed on October 6, 2026: nine required courses, 60 program-curated electives (21 recommended and 39 specialty), and ten reviewed broader-catalog candidates are available. Official catalog metadata is verified for 74 of the 79 records. CSE 5506, CSE 5510, CSE 5815, CSE 5840, and MKTG 5220 remain on the verified program specialty list but are absent from their current departmental catalogs; their formal metadata stays pending. Their `lastChecked` date records the program-source check, not catalog verification. See [data and source review notes](DATA.md#source-differences-requiring-program-review), including the generic GRAD 5900 special-topics treatment.
+Official sources were checked on October 6, 2026. All 96 departmental Graduate Catalog pages were retrieved, yielding 2,797 normalized courses numbered 5000 and above. The complete maintenance-only metadata is in `data/catalog/source-index.json`; the browser imports the smaller topic-filtered `courses.json` plus `coverage.json`. Nine required courses and 60 program-curated electives (21 recommended and 39 specialty) retain their separate program classifications.
+
+The filtered index contains 203 records: 202 explicit topic matches plus retained reviewed candidate OPIM 5641. Deduplicating 27 program-curated codes leaves 176 catalog-only choices and 245 unique application records, of which 240 have verified official metadata. Topic counts overlap: AI 18, machine learning 56, advanced statistics 105, and sports 45. Treat these as versioned keyword-filter results, not an exhaustive academic classification.
+
+CSE 5506, CSE 5510, CSE 5815, CSE 5840, and MKTG 5220 remain on the verified program specialty list but are absent from their current departmental catalogs; their formal metadata stays pending. Their `lastChecked` date records the program-source check, not catalog verification. See [data and source review notes](DATA.md#source-differences-requiring-program-review), including the generic GRAD 5900 special-topics treatment.
 
 Use actual retrieval evidence to update verification flags. A passed schema validation run is not permission to mark sources verified.
 
@@ -43,6 +47,16 @@ Add a unique lowercase hyphenated `id` in `data/pathways.json`, plus `title`, `s
 
 Mappings are interpretive educational connections and require program review. Add the pathway ID to relevant courses' `pathways` arrays when justified by their actual descriptions. Verify that the interface labels the pathway as suggested rather than an official concentration.
 
+The current seven templates also define:
+
+- `signature`: `true` for the featured AI & Machine Learning and Sports Analytics suggestions; this is a presentation flag, not official program recognition.
+- `electiveRange`: `{ "min": 2, "max": 3 }`, describing the exploratory template size rather than changing the verified two-elective requirement.
+- `suggestedCombination`: two or three unique, real course codes from the local elective collections, including any explicitly catalog-only discovery options.
+- `capstone`: a `title`, `summary`, and nonempty `questions` array describing a possible topical GRAD 5800 project; these are proposals requiring review of scope, data access, and supervision.
+- `coreSubstitutionNote`: explicit language explaining that replacing a required core is a proposal requiring program approval, with no verified substitution policy.
+
+The current degree remains eight core courses totaling 21 credits, two electives totaling 6 credits, and a 3-credit capstone. Keep a third suggested course clearly optional and subject to approval/credit-fit confirmation. A template does not replace required core courses or create an official concentration.
+
 ## 5. Add an official concentration later
 
 First obtain program documentation that explicitly establishes the concentration. The pathway schema already permits `official: true` and requires `officialSourceUrl` in that case. Add that authoritative URL and reviewed definitions to `data/pathways.json`.
@@ -51,30 +65,44 @@ Do not mark a suggested thematic pathway official on the basis of relevant cours
 
 ## 6. Refresh catalog metadata
 
-The refresh script retrieves only requested departments and creates a normalized local index. It never runs during application requests. First inspect changes without writing:
+The refresh script discovers departments from the official graduate-course index. By default it retrieves all discovered departments with concurrency four and filters title/description text for `ai,machine-learning,advanced-statistics,sports`. It never runs during application requests. First inspect a complete refresh without writing:
 
 ```sh
-npm run refresh-catalog -- --departments STAT,CSE --dry-run
+npm run refresh-catalog -- --all-departments --dry-run
 ```
 
-After network access works and the output is sensible:
+After reviewing the output, refresh the checked-in data and save official HTML snapshots outside the checkout:
 
 ```sh
-npm run refresh-catalog -- --departments STAT,CSE
+npm run refresh-catalog -- --all-departments --snapshot-dir /workspace/msds-catalog-snapshots
 npm run validate-data
 ```
 
-Without `--departments`, the script uses `ARE,BIST,CSE,EPSY,GRAD,MKTG,NRE,OPIM,STAT`. Initial discovery also reviewed EEB; include `--departments EEB` to refresh that department's candidates. It indexes 5000- and 6000-level courses. Fixed credits are retained; variable-credit ranges remain unknown in the numeric field. Descriptions and detected enrollment restrictions preserve source wording. Inspect parser output against the source before relying on it; catalog page structure can change.
+Plain `npm run refresh-catalog` also means all departments. `--departments STAT,EDLR` limits a later refresh to those departments; `--topics ai,sports` limits topic filters. Supported topic IDs are `ai`, `machine-learning`, `advanced-statistics`, and `sports`. Initial full source-index creation requires a successful pass over every discovered department.
 
-Refreshing selected departments preserves existing records for other departments, as well as existing editorial summaries, tags, capabilities, pathway assignments, and source notes for refreshed catalog records. The script validates all retrieved data before an atomic output replacement. Fetch failures, empty parsing, invalid data, and duplicate codes leave the existing index unchanged. It does not edit the program-curated files; reconcile their official facts separately after reviewing catalog changes. Program-curated records take precedence when the same code appears in both collections.
+Three files are maintained: `courses.json` (topic matches and retained reviewed candidates), `coverage.json` (department results, rules, counts, and dates), and `source-index.json` (complete normalized source metadata). The full source index is not imported by the UI; it supports later review and wider matching without runtime UConn calls. Catalog metadata copies official wording, credits, and stated requirements. Fixed credits are numeric; variable ranges stay `null`. Topic tags and `catalogMatches` evidence are transparent interpretive results, not new official claims.
 
-For authoritative saved HTML, place files such as `stat.html` and `cse.html` in a source snapshot directory. Supply the date those files were actually retrieved:
+Refreshing selected departments preserves unselected records and existing editorial summaries, tags, capabilities, pathway assignments, and source notes. The script does not edit program-curated files or the degree rules. Reconcile their official facts separately after reviewing changes; curated records take precedence for duplicate codes. Inspect official wording and evidence excerpts against the source, especially if catalog HTML changes.
+
+A later partial retrieval preserves prior records for failed departments, writes successful updates with partial coverage, and exits unsuccessfully. Check `failedDepartments`, repair the cause, and rerun affected departments before calling the refresh complete. No successful department retrieval, invalid schemas, or conflicting duplicate codes stops the update. Each output file is replaced atomically; the three-file set is not a single transaction, so rerun after an interrupted write and validate all outputs together.
+
+For authoritative saved HTML, include `catalog-index.html` and department-slug files such as `stat.html` and `edlr.html`. Supply their actual retrieval date:
 
 ```sh
-npm run refresh-catalog -- --departments STAT,CSE --from-dir /path/to/catalog-snapshots --checked-on YYYY-MM-DD --dry-run
+npm run refresh-catalog -- --all-departments --from-dir /workspace/msds-catalog-snapshots --checked-on YYYY-MM-DD --dry-run
 ```
 
-Replace the path and date before running; remove `--dry-run` to write. `--output data/catalog/review.json` can produce a separate review artifact. Offline mode requires an explicit check date. Never change a retrieval date merely to make stale content appear current. The UI flags records older than 180 days for review.
+Replace the path and date before running; remove `--dry-run` to write. Offline mode requires an explicit check date. `--output`, `--coverage-output`, and `--source-index-output` can direct outputs to a separate review directory. Never change retrieval dates merely to make stale content appear current. The UI flags records older than 180 days for review.
+
+Re-filter the complete normalized metadata without any network calls:
+
+```sh
+npm run refresh-catalog -- --all-departments --topics ai,machine-learning,advanced-statistics,sports --from-index data/catalog/source-index.json --dry-run
+```
+
+Remove `--dry-run` after reviewing the results to save. `--from-index` uses the adjacent `coverage.json` by default; `--source-coverage` can identify its accompanying coverage file elsewhere. It preserves original per-course and coverage source-check dates. Saved coverage records `refilteredFromStoredSnapshot` and `filterAppliedOn` to distinguish matching changes from fresh retrieval. Use `--from-index` or `--from-dir` separately; snapshot downloading applies only to HTML retrieval.
+
+To widen matching, review the local full metadata and edit the versioned rules in `scripts/lib/catalog-topics.ts`, then use `--from-index` to apply them to every stored course without new UConn calls. Update `topicRuleVersion`, inspect new evidence excerpts, and run parser/topic tests. The filter identifies explicit words in official titles and descriptions; it does not exhaustively classify every academically relevant course. Generic research or special-topic shells qualify only when their descriptions explicitly support the topic.
 
 ## 7. Modify recommendation tags
 

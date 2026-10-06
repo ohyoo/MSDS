@@ -148,6 +148,9 @@ test("pathways contain actual course possibilities and the guide cites sources w
   page,
 }) => {
   await page.goto("./");
+  await expect(page.locator(".signature-pathways .pathway-card")).toHaveCount(
+    2,
+  );
   await page
     .locator(".pathway-card")
     .filter({ hasText: "Sports Analytics" })
@@ -155,7 +158,15 @@ test("pathways contain actual course possibilities and the guide cites sources w
   const dialog = page.getByRole("dialog");
   await expect(dialog).toContainText("SUGGESTED PATHWAY");
   await expect(dialog.locator(".related-courses button").first()).toBeVisible();
-  await expect(dialog).toContainText("Elective possibilities");
+  await expect(dialog).toContainText(/elective possibilities/i);
+  await expect(dialog.locator(".pathway-combination-row")).toHaveCount(3);
+  await expect(dialog.locator(".pathway-combination-list")).toContainText(
+    "EDLR 5380",
+  );
+  await expect(dialog.locator(".pathway-capstone-brief")).toContainText(
+    "TOPICAL CAPSTONE IDEA",
+  );
+  await expect(dialog).toContainText("Additional credits & core substitutions");
   await expect(dialog).toHaveCSS("opacity", "1");
   await expect(page.locator(".modal-backdrop")).toHaveCSS("opacity", "1");
   await assertAccessible(

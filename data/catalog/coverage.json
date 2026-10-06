@@ -1,0 +1,929 @@
+{
+  "sourceUrl": "https://catalog.uconn.edu/graduate/courses/",
+  "lastChecked": "2026-10-06",
+  "scope": "Graduate catalog courses numbered 5000 and above; explicit topic matches in official titles/descriptions. Academic relevance is interpretive, not an approval decision.",
+  "status": "complete",
+  "totalDepartments": 96,
+  "retrievedDepartments": 96,
+  "failedDepartments": [],
+  "totalParsedCourses": 2797,
+  "matchedCourses": 202,
+  "indexedCourses": 203,
+  "retainedReviewedCandidates": ["OPIM 5641"],
+  "topics": ["ai", "machine-learning", "advanced-statistics", "sports"],
+  "topicCounts": {
+    "ai": 18,
+    "machine-learning": 56,
+    "advanced-statistics": 105,
+    "sports": 45
+  },
+  "filterVersion": "2026-10-06.1",
+  "rules": [
+    {
+      "topic": "ai",
+      "patterns": [
+        "\\bartificial intelligence\\b",
+        "\\bgenerative (?:AI|artificial intelligence)\\b",
+        "\\blarge language models?\\b",
+        "\\b(?:LLMs?|agentic systems?|retrieval[- ]augmented generation|prompt engineering)\\b",
+        "\\bAI\\b"
+      ]
+    },
+    {
+      "topic": "machine-learning",
+      "patterns": [
+        "\\bmachine[- ]learning\\b",
+        "\\b(?:deep|reinforcement|statistical|supervised|unsupervised|representation) learning\\b",
+        "\\bneural networks?\\b",
+        "\\bdata mining\\b",
+        "\\bsupport vector machines?\\b"
+      ]
+    },
+    {
+      "topic": "advanced-statistics",
+      "patterns": [
+        "\\bBayesian\\b",
+        "\\b(?:survival|longitudinal|multivariate|time[- ]series|spatio[- ]temporal|spatial|categorical) (?:data |statistical )?(?:analysis|statistics|models?|modeling|modelling|regression)\\b",
+        "\\bcausal inference\\b",
+        "\\b(?:statistical inference|mathematical statistics|nonparametric|econometrics|stochastic processes|structural equation|hierarchical (?:linear )?(?:models?|modeling|modelling)|multilevel (?:models?|modeling|modelling)|mixed[- ](?:effects? )?models?|(?:generalized |non)?linear models?|high[- ]dimensional (?:statistics|data|inference))\\b",
+        "\\b(?:design of experiments|experimental design|randomized (?:clinical )?trials|statistical learning)\\b"
+      ]
+    },
+    {
+      "topic": "sports",
+      "patterns": [
+        "\\bsports?\\b",
+        "\\bathleti(?:c|cs|cism)\\b",
+        "\\bathletes?\\b",
+        "\\bmotion capture\\b",
+        "\\b(?:biomechanical|human movement) (?:analysis|assessment|measurement)\\b"
+      ]
+    }
+  ],
+  "departments": [
+    {
+      "department": "ACCT",
+      "title": "Accounting (ACCT)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/acct/",
+      "status": "retrieved",
+      "parsedCourses": 35,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "AFRA",
+      "title": "Africana Studies (AFRA)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/afra/",
+      "status": "retrieved",
+      "parsedCourses": 1,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "AFRI",
+      "title": "African Studies (AFRI)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/afri/",
+      "status": "retrieved",
+      "parsedCourses": 1,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "AH",
+      "title": "Allied Health Sciences (AH)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ah/",
+      "status": "retrieved",
+      "parsedCourses": 29,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "AHNR",
+      "title": "Agriculture, Health and Natural Resources (AHNR)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ahnr/",
+      "status": "retrieved",
+      "parsedCourses": 3,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ALDS",
+      "title": "Applied Linguistics and Discourse Studies (ALDS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/alds/",
+      "status": "retrieved",
+      "parsedCourses": 8,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "AMES",
+      "title": "Advanced Manufacturing for Energy Systems (AMES)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ames/",
+      "status": "retrieved",
+      "parsedCourses": 4,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "AMST",
+      "title": "American Studies (AMST)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/amst/",
+      "status": "retrieved",
+      "parsedCourses": 2,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ANSC",
+      "title": "Animal Science (ANSC)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ansc/",
+      "status": "retrieved",
+      "parsedCourses": 20,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ANTH",
+      "title": "Anthropology (ANTH)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/anth/",
+      "status": "retrieved",
+      "parsedCourses": 33,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ARE",
+      "title": "Agricultural and Resource Economics (ARE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/are/",
+      "status": "retrieved",
+      "parsedCourses": 34,
+      "matchedCourses": 5,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ART",
+      "title": "Art (ART)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/art/",
+      "status": "retrieved",
+      "parsedCourses": 15,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ARTH",
+      "title": "Art History (ARTH)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/arth/",
+      "status": "retrieved",
+      "parsedCourses": 5,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "BADM",
+      "title": "Business Administration (BADM)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/badm/",
+      "status": "retrieved",
+      "parsedCourses": 16,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "BIST",
+      "title": "Biostatistics (BIST)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/bist/",
+      "status": "retrieved",
+      "parsedCourses": 18,
+      "matchedCourses": 7,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "BLAW",
+      "title": "Business Law (BLAW)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/blaw/",
+      "status": "retrieved",
+      "parsedCourses": 11,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "BME",
+      "title": "Biomedical Engineering (BME)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/bme/",
+      "status": "retrieved",
+      "parsedCourses": 33,
+      "matchedCourses": 4,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "CAMS",
+      "title": "Classics and Ancient Mediterranean Studies (CAMS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/cams/",
+      "status": "retrieved",
+      "parsedCourses": 3,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "CE",
+      "title": "Civil Engineering (CE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ce/",
+      "status": "retrieved",
+      "parsedCourses": 31,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "CHEG",
+      "title": "Chemical Engineering (CHEG)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/cheg/",
+      "status": "retrieved",
+      "parsedCourses": 17,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "CHEM",
+      "title": "Chemistry (CHEM)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/chem/",
+      "status": "retrieved",
+      "parsedCourses": 41,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "CHIP",
+      "title": "Health, Intervention, and Policy (CHIP)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/chip/",
+      "status": "retrieved",
+      "parsedCourses": 2,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "CLCS",
+      "title": "Comparative Literary and Cultural Studies (CLCS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/clcs/",
+      "status": "retrieved",
+      "parsedCourses": 16,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "CLTR",
+      "title": "Clinical and Translational Research (CLTR)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/cltr/",
+      "status": "retrieved",
+      "parsedCourses": 6,
+      "matchedCourses": 3,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "COGS",
+      "title": "Cognitive Science (COGS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/cogs/",
+      "status": "retrieved",
+      "parsedCourses": 5,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "COMM",
+      "title": "Communication (COMM)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/comm/",
+      "status": "retrieved",
+      "parsedCourses": 37,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "CSE",
+      "title": "Computer Science and Engineering (CSE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/cse/",
+      "status": "retrieved",
+      "parsedCourses": 44,
+      "matchedCourses": 13,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "DENT",
+      "title": "Dental Science (DENT)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/dent/",
+      "status": "retrieved",
+      "parsedCourses": 30,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "DMD",
+      "title": "Digital Media and Design (DMD)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/dmd/",
+      "status": "retrieved",
+      "parsedCourses": 66,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "DRAM",
+      "title": "Dramatic Arts (DRAM)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/dram/",
+      "status": "retrieved",
+      "parsedCourses": 123,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ECE",
+      "title": "Electrical and Computer Engineering (ECE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ece/",
+      "status": "retrieved",
+      "parsedCourses": 37,
+      "matchedCourses": 4,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ECON",
+      "title": "Economics (ECON)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/econ/",
+      "status": "retrieved",
+      "parsedCourses": 41,
+      "matchedCourses": 8,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "EDCI",
+      "title": "Education Curriculum and Instruction (EDCI)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/edci/",
+      "status": "retrieved",
+      "parsedCourses": 65,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "EDLR",
+      "title": "Educational Leadership (EDLR)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/edlr/",
+      "status": "retrieved",
+      "parsedCourses": 75,
+      "matchedCourses": 14,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "EEB",
+      "title": "Ecology and Evolutionary Biology (EEB)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/eeb/",
+      "status": "retrieved",
+      "parsedCourses": 45,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "EMBA",
+      "title": "Executive MBA (EMBA)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/emba/",
+      "status": "retrieved",
+      "parsedCourses": 28,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ENGL",
+      "title": "English (ENGL)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/engl/",
+      "status": "retrieved",
+      "parsedCourses": 31,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ENGR",
+      "title": "Engineering (ENGR)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/engr/",
+      "status": "retrieved",
+      "parsedCourses": 16,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ENVE",
+      "title": "Environmental Engineering (ENVE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/enve/",
+      "status": "retrieved",
+      "parsedCourses": 19,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "EPSY",
+      "title": "Educational Psychology (EPSY)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/epsy/",
+      "status": "retrieved",
+      "parsedCourses": 110,
+      "matchedCourses": 8,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ERTH",
+      "title": "Earth Sciences (ERTH)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/erth/",
+      "status": "retrieved",
+      "parsedCourses": 30,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ES",
+      "title": "European Studies (ES)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/es/",
+      "status": "retrieved",
+      "parsedCourses": 1,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "FNCE",
+      "title": "Finance (FNCE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/fnce/",
+      "status": "retrieved",
+      "parsedCourses": 45,
+      "matchedCourses": 6,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "FREN",
+      "title": "French (FREN)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/fren/",
+      "status": "retrieved",
+      "parsedCourses": 14,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "GERM",
+      "title": "German (GERM)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/germ/",
+      "status": "retrieved",
+      "parsedCourses": 19,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "GRAD",
+      "title": "Graduate School (GRAD)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/grad/",
+      "status": "retrieved",
+      "parsedCourses": 26,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "GSCU",
+      "title": "Geography, Sustainability, Community and Urban Studies (GSCU)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/gscu/",
+      "status": "retrieved",
+      "parsedCourses": 30,
+      "matchedCourses": 8,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "HCMI",
+      "title": "Healthcare Management and Insurance Studies (HCMI)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/hcmi/",
+      "status": "retrieved",
+      "parsedCourses": 9,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "HDFS",
+      "title": "Human Development and Family Sciences (HDFS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/hdfs/",
+      "status": "retrieved",
+      "parsedCourses": 33,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "HEJS",
+      "title": "Hebrew and Judaic Studies (HEJS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/hejs/",
+      "status": "retrieved",
+      "parsedCourses": 10,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "HIST",
+      "title": "History (HIST)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/hist/",
+      "status": "retrieved",
+      "parsedCourses": 26,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "HRTS",
+      "title": "Human Rights (HRTS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/hrts/",
+      "status": "retrieved",
+      "parsedCourses": 19,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ILCS",
+      "title": "Italian Literature and Cultural Studies (ILCS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ilcs/",
+      "status": "retrieved",
+      "parsedCourses": 13,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "IMS",
+      "title": "Institute of Materials Science (IMS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ims/",
+      "status": "retrieved",
+      "parsedCourses": 4,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "INTS",
+      "title": "International Studies (INTS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ints/",
+      "status": "retrieved",
+      "parsedCourses": 2,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ISG",
+      "title": "Institute for Systems Genomics (ISG)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/isg/",
+      "status": "retrieved",
+      "parsedCourses": 36,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "KINS",
+      "title": "Kinesiology (KINS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/kins/",
+      "status": "retrieved",
+      "parsedCourses": 43,
+      "matchedCourses": 27,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "LAND",
+      "title": "Landscape Architecture (LAND)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/land/",
+      "status": "retrieved",
+      "parsedCourses": 7,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "LCL",
+      "title": "Literatures, Cultures, and Languages (LCL)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/lcl/",
+      "status": "retrieved",
+      "parsedCourses": 9,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "LING",
+      "title": "Linguistics (LING)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ling/",
+      "status": "retrieved",
+      "parsedCourses": 27,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "LLAS",
+      "title": "Latino and Latin American Studies (LLAS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/llas/",
+      "status": "retrieved",
+      "parsedCourses": 13,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MARN",
+      "title": "Marine Sciences (MARN)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/marn/",
+      "status": "retrieved",
+      "parsedCourses": 41,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MATH",
+      "title": "Mathematics (MATH)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/math/",
+      "status": "retrieved",
+      "parsedCourses": 70,
+      "matchedCourses": 9,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MCB",
+      "title": "Molecular and Cell Biology (MCB)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/mcb/",
+      "status": "retrieved",
+      "parsedCourses": 53,
+      "matchedCourses": 3,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "ME",
+      "title": "Mechanical Engineering (ME)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/me/",
+      "status": "retrieved",
+      "parsedCourses": 37,
+      "matchedCourses": 3,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MEDS",
+      "title": "Medical Science (MEDS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/meds/",
+      "status": "retrieved",
+      "parsedCourses": 46,
+      "matchedCourses": 4,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MENT",
+      "title": "Management and Entrepreneurship (MENT)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ment/",
+      "status": "retrieved",
+      "parsedCourses": 35,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MFGE",
+      "title": "Manufacturing Engineering (MFGE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/mfge/",
+      "status": "retrieved",
+      "parsedCourses": 6,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MKTG",
+      "title": "Marketing (MKTG)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/mktg/",
+      "status": "retrieved",
+      "parsedCourses": 25,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MSE",
+      "title": "Materials Science and Engineering (MSE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/mse/",
+      "status": "retrieved",
+      "parsedCourses": 28,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "MUSI",
+      "title": "Music (MUSI)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/musi/",
+      "status": "retrieved",
+      "parsedCourses": 34,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "NAIS",
+      "title": "Native American and Indigenous Studies (NAIS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/nais/",
+      "status": "retrieved",
+      "parsedCourses": 1,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "NRE",
+      "title": "Natural Resources and the Environment (NRE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/nre/",
+      "status": "retrieved",
+      "parsedCourses": 41,
+      "matchedCourses": 4,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "NURS",
+      "title": "Nursing (NURS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/nurs/",
+      "status": "retrieved",
+      "parsedCourses": 96,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "NUSC",
+      "title": "Nutritional Sciences (NUSC)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/nusc/",
+      "status": "retrieved",
+      "parsedCourses": 30,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "OPIM",
+      "title": "Operations and Information Management (OPIM)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/opim/",
+      "status": "retrieved",
+      "parsedCourses": 44,
+      "matchedCourses": 13,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PATH",
+      "title": "Pathobiology (PATH)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/path/",
+      "status": "retrieved",
+      "parsedCourses": 13,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PHAR",
+      "title": "Pharmacy -​ PHAR (PHAR)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/phar/",
+      "status": "retrieved",
+      "parsedCourses": 39,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PHIL",
+      "title": "Philosophy (PHIL)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/phil/",
+      "status": "retrieved",
+      "parsedCourses": 19,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PHYS",
+      "title": "Physics (PHYS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/phys/",
+      "status": "retrieved",
+      "parsedCourses": 26,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PLSC",
+      "title": "Plant Science (PLSC)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/plsc/",
+      "status": "retrieved",
+      "parsedCourses": 12,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PNB",
+      "title": "Physiology and Neurobiology (PNB)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/pnb/",
+      "status": "retrieved",
+      "parsedCourses": 25,
+      "matchedCourses": 3,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "POLS",
+      "title": "Political Science (POLS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/pols/",
+      "status": "retrieved",
+      "parsedCourses": 29,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "POLY",
+      "title": "Polymer Science and Engineering (POLY)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/poly/",
+      "status": "retrieved",
+      "parsedCourses": 11,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PP",
+      "title": "Public Policy (PP)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/pp/",
+      "status": "retrieved",
+      "parsedCourses": 56,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PSYC",
+      "title": "Psychological Sciences (PSYC)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/psyc/",
+      "status": "retrieved",
+      "parsedCourses": 87,
+      "matchedCourses": 3,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PT",
+      "title": "Physical Therapy (PT)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/pt/",
+      "status": "retrieved",
+      "parsedCourses": 40,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "PUBH",
+      "title": "Public Health (PUBH)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/pubh/",
+      "status": "retrieved",
+      "parsedCourses": 42,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "SE",
+      "title": "Systems Engineering (SE)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/se/",
+      "status": "retrieved",
+      "parsedCourses": 11,
+      "matchedCourses": 2,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "SLHS",
+      "title": "Speech, Language and Hearing Science (SLHS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/slhs/",
+      "status": "retrieved",
+      "parsedCourses": 51,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "SOCI",
+      "title": "Sociology (SOCI)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/soci/",
+      "status": "retrieved",
+      "parsedCourses": 31,
+      "matchedCourses": 1,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "SPAN",
+      "title": "Spanish (SPAN)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/span/",
+      "status": "retrieved",
+      "parsedCourses": 12,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "SSW",
+      "title": "Social Work (SSW)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/ssw/",
+      "status": "retrieved",
+      "parsedCourses": 79,
+      "matchedCourses": 3,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "STAT",
+      "title": "Statistics (STAT)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/stat/",
+      "status": "retrieved",
+      "parsedCourses": 36,
+      "matchedCourses": 18,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "TRST",
+      "title": "Translation Studies (TRST)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/trst/",
+      "status": "retrieved",
+      "parsedCourses": 4,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    },
+    {
+      "department": "WGSS",
+      "title": "Women's, Gender, and Sexuality Studies (WGSS)",
+      "sourceUrl": "https://catalog.uconn.edu/graduate/courses/wgss/",
+      "status": "retrieved",
+      "parsedCourses": 15,
+      "matchedCourses": 0,
+      "lastChecked": "2026-10-06"
+    }
+  ]
+}

@@ -32,6 +32,10 @@ export const courseSchema = z
     sourceVerification: z.enum(["verified", "pending"]),
     curationSourceUrl: z.string().url().optional(),
     sourceNotes: nonempty.optional(),
+    graduateLevel: z.number().int().min(5000).max(9000).optional(),
+    catalogMatches: z
+      .array(z.object({ topic: identifier, evidence: nonempty }).strict())
+      .optional(),
   })
   .strict()
   .superRefine((course, ctx) => {
@@ -111,6 +115,21 @@ export const pathwaySchema = z
     careers: z.array(nonempty),
     official: z.boolean(),
     officialSourceUrl: z.string().url().optional(),
+    signature: z.boolean().optional(),
+    electiveRange: z
+      .object({ min: z.literal(2), max: z.literal(3) })
+      .strict()
+      .optional(),
+    suggestedCombination: z.array(nonempty).min(2).max(3).optional(),
+    capstone: z
+      .object({
+        title: nonempty,
+        summary: nonempty,
+        questions: z.array(nonempty).min(1),
+      })
+      .strict()
+      .optional(),
+    coreSubstitutionNote: nonempty.optional(),
   })
   .strict()
   .superRefine((pathway, ctx) => {
@@ -156,10 +175,57 @@ export const programSchema = z
     }
   });
 
+const departmentCoverageSchema = z
+  .object({
+    department: nonempty,
+    title: nonempty,
+    sourceUrl: z.string().url(),
+    status: z.enum(["retrieved", "failed"]),
+    parsedCourses: z.number().int().nonnegative(),
+    matchedCourses: z.number().int().nonnegative(),
+    lastChecked: date,
+    error: nonempty.optional(),
+  })
+  .strict();
+
+export const catalogCoverageSchema = z
+  .object({
+    sourceUrl: z.string().url(),
+    lastChecked: date,
+    scope: nonempty,
+    status: z.enum(["complete", "partial"]),
+    totalDepartments: z.number().int().positive(),
+    retrievedDepartments: z.number().int().nonnegative(),
+    failedDepartments: z.array(
+      z
+        .object({
+          department: nonempty,
+          sourceUrl: z.string().url(),
+          error: nonempty,
+        })
+        .strict(),
+    ),
+    totalParsedCourses: z.number().int().nonnegative(),
+    matchedCourses: z.number().int().nonnegative(),
+    indexedCourses: z.number().int().nonnegative(),
+    retainedReviewedCandidates: z.array(nonempty),
+    topics: z.array(identifier),
+    topicCounts: z.record(identifier, z.number().int().nonnegative()),
+    filterVersion: nonempty,
+    refilteredFromStoredSnapshot: z.boolean().optional(),
+    filterAppliedOn: date.optional(),
+    rules: z.array(
+      z.object({ topic: identifier, patterns: z.array(nonempty) }).strict(),
+    ),
+    departments: z.array(departmentCoverageSchema),
+  })
+  .strict();
+
 export type Course = z.infer<typeof courseSchema>;
 export type Capability = z.infer<typeof capabilitySchema>;
 export type Pathway = z.infer<typeof pathwaySchema>;
 export type Program = z.infer<typeof programSchema>;
+export type CatalogCoverage = z.infer<typeof catalogCoverageSchema>;
 
 export const coursesSchema = z.array(courseSchema);
 export const capabilitiesSchema = z.array(capabilitySchema);
