@@ -6,11 +6,9 @@ The learning map represents capabilities that come together in practice. It does
 
 ## Current content readiness
 
-The initial checkout contained no application, course spreadsheet, or instructor descriptions. The supplied project brief seeds the eight core courses, capstone, and 30-credit structure (21 core / 6 electives / 3 capstone).
+We have eight core courses, capstone, and 30-credit structure (21 core / 6 electives / 3 capstone). All nine required-course records and the program credit structure were checked against official sources on October 6, 2026. 
 
-Access to the official UConn sources has been restored. All nine required-course records and the program credit structure were checked against official sources on October 6, 2026. The catalog title **Fundamental Skills for Data Science** is used for GRAD 5100; its source note preserves the program page's different wording. ARE 5353, EPSY 5641, and OPIM 5605 each carry two credits, making the eight-course core total 21 credits.
-
-The app keeps nine required courses and **60 program-curated electives** (21 recommended and 39 specialty) separate from broader-catalog discovery. Five specialty courses—CSE 5506, CSE 5510, CSE 5815, CSE 5840, and MKTG 5220—are on the verified MSDS list but absent from their current departmental catalogs. Their official metadata remains pending; credits, formal descriptions, and prerequisites are unknown. Catalog absence does not establish semester availability or permanent discontinuation.
+The app keeps nine required courses and **60 program-curated electives** (21 recommended and 39 specialty) separate from broader-catalog discovery. Five specialty courses—CSE 5506, CSE 5510, CSE 5815, CSE 5840, and MKTG 5220—are on the verified MSDS list but absent from their current departmental catalogs. Their official metadata remains pending; credits, formal descriptions, and prerequisites are unknown. 
 
 The complete official Graduate Catalog discovery pass retrieved **all 96 departmental pages** and normalized **2,797 graduate courses numbered 5000 or above**. Complete metadata is preserved in `data/catalog/source-index.json` for maintenance; it is not bundled into the browser. A smaller local index exposes explicit AI, machine-learning, advanced-statistics, and sports topic matches, with official-text evidence excerpts and source dates. `coverage.json` records department coverage, matching rules, and counts. Topic relevance is an interpretive keyword filter, not an exhaustive academic classification or an approval rule. The app performs no catalog retrieval during student browsing.
 
